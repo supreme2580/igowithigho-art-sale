@@ -11,7 +11,7 @@ const Home: NextPage = () => {
       </Head>
 
       <h1 className="text-3xl font-bold underline">
-        Hello world!
+        igowithIGHO Art Sale
       </h1>
     </div>
   )
