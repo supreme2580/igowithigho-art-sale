@@ -1,5 +1,4 @@
-Open command prompt
-Move to the folder you want to save the project files in my case it is desktop so I run
+Open command prompt and move to the folder you want to save the project files in my case it is desktop so I run
 ```
 cd desktop
 ```
