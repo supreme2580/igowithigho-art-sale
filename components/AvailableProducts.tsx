@@ -13,7 +13,7 @@ const AvailableProducts = () => {
                  * plugin
                  */
             }
-            <div className="lg:grid lg:grid-cols-3 lg:gap-4 space-x-4 lg:space-x-0 flex overflow-x-scroll w-full xl:w-auto scrollbar-hide">
+            <div className="lg:grid lg:grid-cols-3 lg:gap-4 space-x-4 lg:space-x-0 flex overflow-x-scroll w-full xl:w-auto max-w-4xl scrollbar-hide">
                 <Card />
                 <Card />
                 <Card />

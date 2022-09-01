@@ -3,7 +3,7 @@ import Card from "./Card"
 const Hero = () => {
     return(
         <div className="flex justify-center px-2.5 sm:px-16 pt-10">
-            <div className="w-full space-y-5 flex flex-col md:flex-row items-center md:space-y-0 space-x-0 md:space-x-5 md:max-w-3xl">
+            <div className="w-full space-y-5 flex flex-col md:flex-row items-center md:space-y-0 space-x-0 md:space-x-5 md:max-w-4xl">
                 <div className="space-y-6">
                     <h1 className="text-3xl text-center font-bold text-ash">
                         Lorem ipsum dolor sit met, <span className="text-green">consectetur</span> adipiscing elit
