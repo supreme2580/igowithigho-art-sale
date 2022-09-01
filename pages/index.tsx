@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import AvailableProducts from '../components/AvailableProducts'
+import Footer from '../components/Footer'
 import Hero from '../components/Hero'
 import IFrame from '../components/IFrame'
 import Navbar from '../components/Navbar'
@@ -23,6 +24,7 @@ const Home = () => {
             <div className="px-2.5 sm:px-16 pt-10"><IFrame /></div>
             <AvailableProducts />
             <Newsletter />
+            <Footer />
         </main>
       </div>
     </div>
