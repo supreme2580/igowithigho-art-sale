@@ -8,12 +8,18 @@ module.exports = {
     extend: {
       colors: {
         "ash": "#333333",
-        "green": "#56B45E"
+        "green": "#56B45E",
+        "lightBg": "#F1F5F9",
+        "leftGrad": "#BBEAFA",
+        "midGrad": "#FAEEF0",
+        "rightGrad": "#FBE4D1"
       },
       fontFamily: {
         "montserrat": "Montserrat"
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwind-scrollbar-hide")
+  ],
 }

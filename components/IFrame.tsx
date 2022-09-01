@@ -6,7 +6,7 @@ const IFrame = () => {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            className="rounded-3xl w-full h-64 md:h-96" />
+            className="rounded-3xl w-full h-64 md:h-96 max-w-4xl mx-auto" />
     )
 }
 

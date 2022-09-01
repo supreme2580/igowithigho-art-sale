@@ -1,7 +1,9 @@
 import Head from 'next/head'
+import AvailableProducts from '../components/AvailableProducts'
 import Hero from '../components/Hero'
 import IFrame from '../components/IFrame'
 import Navbar from '../components/Navbar'
+import Newsletter from '../components/Newsletter'
 
 const Home = () => {
   return (
@@ -15,10 +17,13 @@ const Home = () => {
         /** Navbar component for small and large screen */
       }
       <Navbar />
-      <div className="absolute top-0 inset-x-0 mt-24 px-2.5 sm:px-16 pt-10 h-full space-y-8">
-        <Hero />
-        <IFrame />
-        <div>Hi</div>
+      <div className="absolute top-0 inset-x-0 mt-24 h-full">
+        <main className="space-y-8">
+            <Hero />
+            <div className="px-2.5 sm:px-16 pt-10"><IFrame /></div>
+            <AvailableProducts />
+            <Newsletter />
+        </main>
       </div>
     </div>
   )
