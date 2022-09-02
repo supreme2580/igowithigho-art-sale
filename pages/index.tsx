@@ -22,7 +22,7 @@ const Home = () => {
         <main className="space-y-8">
             <Hero />
             <div className="px-2.5 sm:px-16 pt-10"><IFrame /></div>
-            <AvailableProducts />
+            <AvailableProducts page={"home"} />
             <Newsletter />
             <Footer />
         </main>

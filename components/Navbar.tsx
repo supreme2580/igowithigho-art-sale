@@ -7,6 +7,8 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import SideNav from "./SideNav"
+import { useSession } from "next-auth/react"
+import Profile from "./Profile"
 
 interface Page {
     page: string;
@@ -16,6 +18,11 @@ const Navbar = ({ page }: Page) => {
     const toggleSideBar = () => {
         document.querySelector(".sidebar")?.classList.toggle("-translate-x-full")
     }
+    {
+        //get session data to check if the user is logged in or not
+    }
+    const { data: session } = useSession()
+    console.log(session)
     return (
         <nav className="relative flex w-full">
             {
@@ -40,7 +47,15 @@ const Navbar = ({ page }: Page) => {
                 </div>
                 <div className="items-center justify-between hidden space-x-4 md:flex">
                     <div><Link href="/"><a><ShoppingCartIcon className="w-6 h-6" /></a></Link></div>
-                    <Link href="/"><a><div className="px-6 py-2 text-white rounded-full bg-ash"><button>Login</button></div></a></Link>
+                    {
+                        /**
+                         * check if the name in a session exists to determine logged in or not
+                         * if logged in display the image of the user
+                         */
+                    }
+                    {
+                        session != null ? <Profile image={session.user.image} name={session.user.name} /> : <Link href="/auth/signin"><a><div className="px-6 py-2 text-white rounded-full bg-ash"><button>Login</button></div></a></Link>
+                    }
                 </div>
             </div>
         </nav>
