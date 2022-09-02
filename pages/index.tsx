@@ -8,7 +8,7 @@ import Newsletter from '../components/Newsletter'
 
 const Home = () => {
   return (
-    <div className="">
+    <div>
       <Head>
         <title>igowithIGHO Art Sale</title>
         <meta name="description" content="igowithIGHO Art Sale" />
@@ -17,8 +17,8 @@ const Home = () => {
       {
         /** Navbar component for small and large screen */
       }
-      <Navbar />
-      <div className="absolute top-0 inset-x-0 mt-24 h-full">
+      <Navbar page={"home"} />
+      <div className="absolute inset-x-0 top-0 h-full mt-24">
         <main className="space-y-8">
             <Hero />
             <div className="px-2.5 sm:px-16 pt-10"><IFrame /></div>
