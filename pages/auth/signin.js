@@ -11,7 +11,7 @@ const signIn = ({ providers }) => {
                 }
                 {Object.values(providers).map((provider) => (
                     <div key={provider.name}>
-                        <button className="p-3 text-white rounded-lg bg-green" onClick={() => SignIntoProvider(provider.id, { callbackUrl: "/" })}>
+                        <button className="px-6 py-2 text-white rounded-full bg-ash" onClick={() => SignIntoProvider(provider.id, { callbackUrl: "/" })}>
                             Sign in with {provider.name}
                         </button>
                     </div>
