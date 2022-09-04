@@ -46,10 +46,13 @@ const CartModal = () => {
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                        <Dialog.Panel className="relative p-5 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 max-w-[300px] sm:max-w-md">
+                        <Dialog.Panel className="relative p-5 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 max-w-[300px] sm:max-w-md space-y-2">
                             {
                                 //cart item begin
                             }
+                            <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-center">
+                              Cart
+                            </Dialog.Title>
                                 <div className="flex items-center justify-between w-full space-x-2.5">
                                     <div>
                                         <Image src="/cardImg.png" width={75} height={75} className="rounded-xl" />
