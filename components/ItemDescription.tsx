@@ -22,7 +22,7 @@ const ItemDescription = () => {
                         </div>
                         <div className="flex-1 space-y-2 mx-2.5">
                             <div>
-                                <h1 className="text-xl font-bold">Monalisa</h1>
+                                <h1 className="max-w-[300px] sm:max-w-md break-words text-xl font-bold">Monalisa</h1>
                             </div>
                             <div className="max-w-md space-y-2">
                                 <h1 className="text-lg">
