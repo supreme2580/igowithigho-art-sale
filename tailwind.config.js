@@ -12,7 +12,9 @@ module.exports = {
         "lightBg": "#F1F5F9",
         "leftGrad": "#BBEAFA",
         "midGrad": "#FAEEF0",
-        "rightGrad": "#FBE4D1"
+        "rightGrad": "#FBE4D1",
+        "gold": "#FFD700",
+        "inactive": "#b2beb5"
       },
       fontFamily: {
         "montserrat": "Montserrat"

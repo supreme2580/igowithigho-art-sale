@@ -31,7 +31,7 @@ const Navbar = ({ page }: Page) => {
             <SideNav page={page} />
             <div className="bg-white flex items-center justify-between px-2.5 sm:px-16 w-full h-32 absolute left-0 right-0">
                 <div className="flex items-center justify-between w-full md:w-auto">
-                    <div><Image src="/logo.png" width={75} height={75} /></div>
+                    <div><Image src="/logo.png" width={100} height={40} /></div>
                     {
                         //hide the menu icon when on medium screen and above
                     }
