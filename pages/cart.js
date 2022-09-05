@@ -3,6 +3,7 @@ import Image from "next/image"
 import Navbar from "../components/Navbar"
 import Newsletter from "../components/Newsletter"
 import Footer from "../components/Footer"
+import Head from "next/head"
 
 const Cart = () => {
     return(
