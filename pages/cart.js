@@ -7,6 +7,11 @@ import Footer from "../components/Footer"
 const Cart = () => {
     return(
         <div>
+            <Head>
+                <title>igowithIGHO Art Sale</title>
+                <meta name="description" content="igowithIGHO Art Sale" />
+                <link rel="icon" href="/logo.png" />
+            </Head>
             <Navbar page={""} />
             <div className="absolute inset-x-0 top-0 h-full mt-24 bg-lightBg">
                 <main className="space-y-8">
