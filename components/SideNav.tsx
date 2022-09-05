@@ -1,8 +1,6 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link"
 import Profile from "./Profile";
-import { useRecoilState } from "recoil"
-import { modalState } from "../atoms/modalAtom"
 
 interface Page {
     page: string;
@@ -10,7 +8,6 @@ interface Page {
 
 const SideNav = ({ page }: Page) => {
     const { data: session } = useSession()
-    const [open, setOpen] = useRecoilState(modalState)
     return (
         <nav className="fixed z-20 w-64 min-h-screen px-3 py-5 space-y-5 transition duration-200 ease-in-out transform -translate-x-full bg-white border-r border-ash sidebar md:hidden">
             <div className="flex flex-col items-center justify-center">
@@ -50,8 +47,8 @@ const SideNav = ({ page }: Page) => {
                         <h2 className="w-full p-3 hover:bg-lightBg hover:cursor-pointer">Initiative</h2>
                     </a>
                 </Link>
-                <Link href="/">
-                    <a className="text-lg" onClick={() => setOpen(true)}>
+                <Link href="/cart">
+                    <a className="text-lg">
                         <h2 className="w-full p-3 hover:bg-lightBg hover:cursor-pointer">Cart</h2>
                     </a>
                 </Link>

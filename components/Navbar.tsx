@@ -9,10 +9,6 @@ import Link from "next/link"
 import SideNav from "./SideNav"
 import { useSession } from "next-auth/react"
 import Profile from "./Profile"
-import CartModal from "./CartModal"
-import { useRecoilState } from "recoil"
-import { modalState } from "../atoms/modalAtom"
-import { useEffect } from "react"
 
 interface Page {
     page: string;
@@ -26,12 +22,6 @@ const Navbar = ({ page }: Page) => {
         //get session data to check if the user is logged in or not
     }
     const { data: session } = useSession()
-    const [open, setOpen] = useRecoilState(modalState)
-    useEffect(() => {
-        if (open == true) {
-            document.querySelector(".sidebar")?.classList.toggle("-translate-x-full")
-        }
-    }, [open])
     return (
         <nav className="relative flex w-full">
             {
@@ -55,7 +45,7 @@ const Navbar = ({ page }: Page) => {
                     <h3 className={`text-lg ${page == "init" && "font-bold"}`}><Link href="/"><a>Initiative</a></Link></h3>
                 </div>
                 <div className="items-center justify-between hidden space-x-4 md:flex">
-                    <div><Link href="/"><a><ShoppingCartIcon className="w-6 h-6" onClick={() => setOpen(true)} /></a></Link></div>
+                    <div><Link href="/cart"><a><ShoppingCartIcon className="w-6 h-6" /></a></Link></div>
                     {
                         /**
                          * check if the name in a session exists to determine logged in or not
@@ -67,7 +57,6 @@ const Navbar = ({ page }: Page) => {
                     }
                 </div>
             </div>
-            <CartModal />
         </nav>
     )
 }

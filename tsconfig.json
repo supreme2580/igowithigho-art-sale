@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/auth/signin.js", "components/CardItem.js", "components/CartModal.js", "pages/cart.js", "components/CartItems.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/auth/signin.js", "pages/cart.js", "pages/cart.js", "components/CardItem.js", "components/CardItem.js", "components/CartModal.js", "pages/cart.js", "components/CartItems.js"],
   "exclude": ["node_modules"]
 }
