@@ -46,11 +46,11 @@ const CartModal = () => {
                                         //cart item begin
                                     }
                                     <div className='space-y-2 overflow-y-scroll max-h-64 scrollbar-hide'>
-                                        <CardItem id={"hahah"} />
-                                        <CardItem id={"hehehe"} />
-                                        <CardItem id={"hmmmn"} />
-                                        <CardItem id={"lababa"} />
-                                        <CardItem id={"lalala"} />
+                                        <CardItem id={"hahah"} amount={"100"} />
+                                        <CardItem id={"hehehe"} amount={"100"} />
+                                        <CardItem id={"hmmmn"} amount={"100"} />
+                                        <CardItem id={"lababa"} amount={"100"} />
+                                        <CardItem id={"lalala"} amount={"100"} />
                                     </div>
                                     {
                                         //cart item ends

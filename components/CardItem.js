@@ -1,13 +1,25 @@
 import { TrashIcon } from "@heroicons/react/outline"
 import Image from "next/image"
 
-const CardItem = ({ id }) => {
+const CardItem = ({ id, amount }) => {
+    let item = document.getElementById(id)
+    let val = Number(item?.value)
     const increment = () => {
-        document.getElementById(id).innerHTML = document.getElementById(id).value++
+        val += 1
+        item.value = val
+        let price = amount * val
+        document.getElementById(id+"price").innerHTML = "= $" + price
     }
     const decrease = () => {
-        if (document.getElementById(id).value > 1) {
-            document.getElementById(id).innerHTML = document.getElementById(id).value--
+        {
+            //only reduce when no of items is greater than one
+            //because you cannot have less than one of an item in a cart
+        }
+        if (val > 1) {
+            val -= 1
+            item.value = val
+            let price = amount * val
+            document.getElementById(id+"price").innerHTML = "= $" + price
         }
     }
     return(
@@ -31,7 +43,10 @@ const CardItem = ({ id }) => {
                         </button>
                     </div>
                 </div>
-                <button className="text-lg font-semibold">= $100</button>
+                {
+                    //create a unique id by joining the unique id with string price
+                }
+                <button className="text-lg font-semibold" id={`${id}price`}>= ${amount}</button>
             </div>
         </div>
     )
