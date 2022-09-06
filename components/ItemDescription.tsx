@@ -23,6 +23,10 @@ import Share from "./Share"
         }
     }
 const ItemDescription = ({ items }: Data) => {
+    let href
+    if (typeof window != "undefined") {
+        href = window.location.href
+    }
     return(
         <div className="px-2.5 sm:px-16 pt-10 space-y-8">
             <div className="flex justify-center">
@@ -50,7 +54,7 @@ const ItemDescription = ({ items }: Data) => {
                                     //pass the number of stars to the rating component
                                 }
                                 <Rating stars={items.rating} />
-                                <Share />
+                                <Share url={href || ""} />
                                 <Buy price={items.price} />
                             </div>
                         </div>
