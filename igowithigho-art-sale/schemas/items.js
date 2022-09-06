@@ -32,6 +32,11 @@ export default {
             name: "price",
             title: "Price in $",
             type: "number"
+        },
+        {
+            name: "rating",
+            title: "Rating",
+            type: "number"
         }
     ]
 }

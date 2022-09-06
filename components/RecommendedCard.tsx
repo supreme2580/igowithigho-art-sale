@@ -14,7 +14,7 @@ const RecommendedCard = ({ image, description, price, slug }: Data) => {
         <div className="max-w-[300px] flex flex-col items-center justify-center -space-y-2">
             <Link href={`/items/${slug}`}>
                 <a>
-                    <div className="rounded-t-xl"><Image src={image} width={300} height={175} /></div>
+                    <div className="rounded-t-xl"><Image src={image} width={300} height={175} className="rounded-t-xl" /></div>
                 </a>
             </Link>
             <div className="bg-green rounded-b-xl">

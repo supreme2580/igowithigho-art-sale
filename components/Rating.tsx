@@ -1,7 +1,7 @@
 import { StarIcon } from "@heroicons/react/solid"
 
 interface Stars {
-    stars: String
+    stars: number
 }
 
 const Rating = ({stars }: Stars) => {
@@ -16,11 +16,11 @@ const Rating = ({stars }: Stars) => {
                      * I use string for this because strings are easy to manipulate
                      */
                 }
-                <StarIcon className={`w-6 h-6 ${Number(stars) >= Number("1") ? "text-gold" : "text-inactive"}`} />
-                <StarIcon className={`w-6 h-6 ${Number(stars) >= Number("2") ? "text-gold" : "text-inactive"}`} />
-                <StarIcon className={`w-6 h-6 ${Number(stars) >= Number("3") ? "text-gold" : "text-inactive"}`} />
-                <StarIcon className={`w-6 h-6 ${Number(stars) >= Number("4") ? "text-gold" : "text-inactive"}`} />
-                <StarIcon className={`w-6 h-6 ${Number(stars) >= Number("5") ? "text-gold" : "text-inactive"}`} />
+                <StarIcon className={`w-6 h-6 ${stars >= 1 ? "text-gold" : "text-inactive"}`} />
+                <StarIcon className={`w-6 h-6 ${stars >= 2 ? "text-gold" : "text-inactive"}`} />
+                <StarIcon className={`w-6 h-6 ${stars >= 3 ? "text-gold" : "text-inactive"}`} />
+                <StarIcon className={`w-6 h-6 ${stars >= 4 ? "text-gold" : "text-inactive"}`} />
+                <StarIcon className={`w-6 h-6 ${stars >= 5 ? "text-gold" : "text-inactive"}`} />
             </div>
         </div>
     )

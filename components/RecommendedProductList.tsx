@@ -2,22 +2,23 @@ import { urlFor } from "../sanity"
 import RecommendedCard from "./RecommendedCard"
 
 interface Data {
-    items: [
-      {
-        _id: string
-        description: string
-        thumbnail: {
-          asset: {
-            _ref: string
-          }
-        }
-        price: string
-        slug: {
-          current: string
+  items: [
+    {
+      _id: string
+      title: string
+      description: string
+      thumbnail: {
+        asset: {
+          _ref: string
         }
       }
-    ]
-  }
+      price: string
+      slug: {
+        current: string
+      }
+    }
+  ]
+}
 
 const RecommendedProductList = ({ items }: Data) => {
     return(
