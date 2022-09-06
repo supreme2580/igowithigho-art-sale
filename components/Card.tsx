@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
+import Message from "./message"
 
 interface Data {
     id: string
@@ -22,7 +23,7 @@ const Card = ({ image, description, price, slug, title, id }: Data) => {
     const cost = Number(price)
     const name = customer_name
     const product_id = id
-    const product_name = name
+    const product_name = title
     const thumbnail = image
     const item = {
         thumbnail,
@@ -33,32 +34,22 @@ const Card = ({ image, description, price, slug, title, id }: Data) => {
         customer_id,
         customer_mail
     }
+    let message = "";
     const AddItemToCart = () => {
-        {
-            //cart item
-        }
         {
             //this function adds the item to cart in sanity cms
         }
+        message = "Adding item to cart..."
         function saveItem() {
             fetch("/api/addItem", {
                 method: "POST",
                 body: JSON.stringify(item)
             }).then(() => {
-                console.log("Submitted")
-            }).catch(error => console.log(error))
-            console.log("Save Item")
+                message = "Item added to cart"
+            }).catch(() => message = "Error")
             return true
         }
-        {
-            /**
-             * add item to local array of items
-             */
-        }
-        if (saveItem()) {
-            console.log("Saved")
-            console.log(item)
-        }
+        saveItem()
     }
     return (
         <div className="max-w-[300px] border-2 border-ash rounded-2xl flex flex-col items-center justify-center">
@@ -71,6 +62,11 @@ const Card = ({ image, description, price, slug, title, id }: Data) => {
                 </a>
             </Link>
             <button className="bg-ash text-white p-2.5 my-2.5 mx-2 w-64 rounded-full" onClick={AddItemToCart}>Add to cart</button>
+            <div>
+                <div className="absolute bottom-0 right-0 bg-green text-white font-semibold p-2.5 mb-28">
+                    <div></div>
+                </div> 
+            </div>
         </div> 
     )
 }
