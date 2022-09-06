@@ -21,6 +21,7 @@ interface Data {
       slug: {
         current: string
       }
+      title: string
     }
   ]
 }
@@ -39,7 +40,7 @@ const Home = ({ items }: Data) => {
       <Navbar page={"home"} />
       <div className="absolute inset-x-0 top-0 h-full mt-24">
         <main className="space-y-8">
-            <Hero image={urlFor(items[0].thumbnail.asset._ref).url()} description={items[0].description} id={items[0]._id} price={items[0].price} slug={items[0].slug.current} />
+            <Hero image={urlFor(items[0].thumbnail.asset._ref).url()} description={items[0].description} id={items[0]._id} price={items[0].price} slug={items[0].slug.current} title={items[0].title} />
             <div className="px-2.5 sm:px-16 pt-10"><IFrame /></div>
             <AvailableProducts page={"home"} data={items} />
             <Newsletter />
@@ -61,7 +62,8 @@ export const getServerSideProps = async() => {
       price,
       slug {
         current
-      }
+      },
+      title
     }
   `
   const items = await sanityClient.fetch(query)

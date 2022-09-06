@@ -20,6 +20,7 @@ interface Data {
       slug: {
         current: string
       }
+      title: string
     }
   ]
 }
@@ -56,7 +57,8 @@ export const getServerSideProps = async() => {
         price,
         slug {
           current
-        }
+        },
+        title
       }
     `
     const items = await sanityClient.fetch(query)

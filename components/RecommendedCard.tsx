@@ -7,9 +7,10 @@ interface Data {
     description: string
     slug: string
     price: string
+    title: string
 }
 
-const RecommendedCard = ({ image, description, price, slug }: Data) => {
+const RecommendedCard = ({ image, description, price, slug, title }: Data) => {
     return(
         <div className="max-w-[300px] flex flex-col items-center justify-center -space-y-2">
             <Link href={`/items/${slug}`}>

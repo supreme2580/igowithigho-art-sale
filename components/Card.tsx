@@ -7,9 +7,10 @@ interface Data {
     description: string
     slug: string
     price: string
+    title: string
 }
 
-const Card = ({ image, description, price, slug }: Data) => {
+const Card = ({ image, description, price, slug, title }: Data) => {
     {
         //const cartItem provides static data for our testing
     }

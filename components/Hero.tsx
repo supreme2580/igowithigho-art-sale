@@ -6,9 +6,10 @@ interface Data {
     id: string
     price: string
     slug: string
+    title: string
 }
 
-const Hero = ({ image, description, id, price, slug }: Data) => {
+const Hero = ({ image, description, id, price, slug, title }: Data) => {
     return(
         <div className="flex justify-center px-2.5 sm:px-16 pt-10">
             <div className="w-full space-y-5 flex flex-col md:flex-row items-center md:space-y-0 space-x-0 md:space-x-5 md:max-w-4xl">
@@ -25,7 +26,7 @@ const Hero = ({ image, description, id, price, slug }: Data) => {
                 </div>
                 <div>
                     <div className="flex items-center justify-center">
-                    <Card image={image} description={description} id={id} slug={slug} price={price} />
+                    <Card image={image} description={description} id={id} slug={slug} price={price} title={title} />
                     </div>
                 </div>
             </div>

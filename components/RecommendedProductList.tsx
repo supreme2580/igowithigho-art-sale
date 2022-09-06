@@ -24,7 +24,7 @@ const RecommendedProductList = ({ items }: Data) => {
     return(
         <div className="flex space-x-2.5 py-2.5">
             {
-                items.map(item => <RecommendedCard key={item._id} image={urlFor(item.thumbnail.asset._ref).url()} description={item.description} id={item._id} slug={item.slug.current} price={item.price} />)
+                items.map(item => <RecommendedCard key={item._id} image={urlFor(item.thumbnail.asset._ref).url()} description={item.description} id={item._id} slug={item.slug.current} price={item.price} title={item.title} />)
             }
         </div>
     )
