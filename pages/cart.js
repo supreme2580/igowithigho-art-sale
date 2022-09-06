@@ -77,7 +77,7 @@ const Cart = () => {
                                     }
                                 </div>
                             </div>
-                            <div className="flex-1 bg-white max-h-lg p-2.5 border-2 border-lightBg space-y-1.5">
+                            <div className="flex-1 bg-white max-h-[270px] p-2.5 border-2 border-lightBg space-y-1.5">
                                 <h1 className="py-4 text-lg font-semibold">CART SUMMARY</h1>
                                 <div className="h-[2px] bg-lightBg space-y-2" />
                                 <div className="flex justify-between">
