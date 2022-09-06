@@ -53,7 +53,7 @@ const Navbar = ({ page }: Page) => {
                          */
                     }
                     {
-                        session != null ? <Profile image={session.user.image} name={session.user.name} /> : <Link href="/auth/signin"><a><div className="px-6 py-2 text-white rounded-full bg-ash"><button>Login</button></div></a></Link>
+                        session != null ? <Profile image={session?.user?.image || ""} name={session?.user?.name || ""} /> : <Link href="/auth/signin"><a><div className="px-6 py-2 text-white rounded-full bg-ash"><button>Login</button></div></a></Link>
                     }
                 </div>
             </div>

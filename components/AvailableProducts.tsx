@@ -17,6 +17,7 @@ interface Page {
             slug: {
                 current: string
             }
+            title: string
         }
     ]
 }

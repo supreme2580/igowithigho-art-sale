@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { useSession } from "next-auth/react"
 
 interface Data {
     id: string
@@ -10,9 +11,22 @@ interface Data {
     title: string
 }
 
-const Card = ({ image, description, price, slug, title }: Data) => {
+const Card = ({ image, description, price, slug, title, id }: Data) => {
     {
         //const cartItem provides static data for our testing
+    }
+    const { data: session } = useSession()
+    const customer_name = session?.user?.name
+    const customer_id = session?.user?.id
+    const customer_mail = session?.user?.email
+    const item = {
+        image,
+        title,
+        price,
+        id,
+        customer_name,
+        customer_id,
+        customer_mail
     }
     const AddItemToCart = () => {
         {
@@ -32,6 +46,7 @@ const Card = ({ image, description, price, slug, title }: Data) => {
         }
         if (saveItem()) {
             console.log("Saved")
+            console.log(item)
         }
     }
     return (
