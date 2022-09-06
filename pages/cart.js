@@ -15,13 +15,13 @@ const Cart = () => {
             </Head>
             <Navbar page={""} />
             <div className="absolute inset-x-0 top-0 h-full mt-24 bg-lightBg">
-                <main className="space-y-8">
+                <main className="space-y-8 bg-white">
                     {
                         //cart and checkout
                     }
                     <div className="flex justify-center px-2.5 sm:px-16 pt-10">
                         <div className="flex flex-col w-full space-x-0 space-y-5 md:flex-row md:space-y-0 md:space-x-5 md:max-w-4xl">
-                            <div className="flex flex-col flex-1 bg-white md:max-w-md">
+                            <div className="flex flex-col flex-1 bg-white md:max-w-md border-2 border-lightBg">
                                 <h1 className="py-4 text-lg font-semibold px-2.5">Cart</h1>
                                 <div className="h-[2px] bg-lightBg space-y-2" />
                                     <div className="p-2.5 space-y-4">
@@ -77,13 +77,15 @@ const Cart = () => {
                                     }
                                 </div>
                             </div>
-                            <div className="flex-1 bg-white max-h-[165px] px-2.5">
+                            <div className="flex-1 bg-white max-h-lg p-2.5 border-2 border-lightBg space-y-1.5">
                                 <h1 className="py-4 text-lg font-semibold">CART SUMMARY</h1>
                                 <div className="h-[2px] bg-lightBg space-y-2" />
                                 <div className="flex justify-between">
                                     <h2 className="text-base font-semibold py-2.5">Subtotal</h2>
                                     <h2 className="text-base font-semibold py-2.5">$200</h2>
                                 </div>
+                                <p className="text-xs">Your full address should contain your state and country</p>
+                                <input type="text" placeholder="Enter your full house address" className="p-2.5 border border-lightBg w-full outline-none" />
                                 <button className="w-full text-lg font-semibold text-white bg-green p-2.5">Checkout $200</button>
                             </div>
                         </div>
