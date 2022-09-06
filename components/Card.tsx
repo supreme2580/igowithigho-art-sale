@@ -2,6 +2,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import Message from "./message"
+import { messageState, waitingState } from "../atoms/messageAtom"
+import { useRecoilState } from "recoil"
+import Waiting from "./Waiting"
 
 interface Data {
     id: string
@@ -34,19 +37,19 @@ const Card = ({ image, description, price, slug, title, id }: Data) => {
         customer_id,
         customer_mail
     }
-    let message = "";
+    const [status, setStatus] = useRecoilState(messageState)
+    const [waiting, setWaiting] = useRecoilState(waitingState)
     const AddItemToCart = () => {
-        {
-            //this function adds the item to cart in sanity cms
-        }
-        message = "Adding item to cart..."
+        setWaiting(true)
         function saveItem() {
             fetch("/api/addItem", {
                 method: "POST",
                 body: JSON.stringify(item)
             }).then(() => {
-                message = "Item added to cart"
-            }).catch(() => message = "Error")
+                setStatus(true)
+            }).catch(() => {
+                setStatus(false)
+            })
             return true
         }
         saveItem()
@@ -62,12 +65,9 @@ const Card = ({ image, description, price, slug, title, id }: Data) => {
                 </a>
             </Link>
             <button className="bg-ash text-white p-2.5 my-2.5 mx-2 w-64 rounded-full" onClick={AddItemToCart}>Add to cart</button>
-            <div>
-                <div className="absolute bottom-0 right-0 bg-green text-white font-semibold p-2.5 mb-28">
-                    <div></div>
-                </div> 
-            </div>
-        </div> 
+        <Message />
+        <Waiting />
+    </div> 
     )
 }
 

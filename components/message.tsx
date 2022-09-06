@@ -1,15 +1,21 @@
 import { useEffect } from "react"
+import { messageState } from "../atoms/messageAtom"
+import { useRecoilState } from "recoil"
 
-interface Data {
-    message: string
-}
-
-const Message = ({ message }: Data) => {
+const Message = () => {
+    let message;
+    const [status, setStatus] = useRecoilState(messageState)
+    useEffect(() => {
+        status ? message = "Item added to cart" : message = "Error adding item to cart"
+        setTimeout(() => {
+            setStatus(false)
+        }, 2000);
+    }, [status])
     return (
-        <div>
-           <div className="absolute bottom-0 right-0 bg-green text-white font-semibold p-2.5 mb-28 hidden">
-                {message}
-            </div> 
+        <div className={`${status ? "bg-green" : "bg-red-600"} p-2 absolute bottom-0 right-0 mb-28 mr-5 text-white font-semibold ${status ? "block" : "hidden"}`}>
+            {
+                status ? "Item added to cart" : "Error adding item to cart"
+            }
         </div>
     )
 }
