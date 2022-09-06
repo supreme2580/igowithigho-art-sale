@@ -1,13 +1,15 @@
 import Image from "next/image"
+import Link from "next/link"
 
 interface Data {
     id: string
     image: string
     description: string
-    price: number
+    slug: string
+    price: string
 }
 
-const Card = ({ image, description, id, price }: Data) => {
+const Card = ({ image, description, price, slug }: Data) => {
     {
         //const cartItem provides static data for our testing
     }
@@ -33,12 +35,16 @@ const Card = ({ image, description, id, price }: Data) => {
     }
     return (
         <div className="max-w-[300px] border-2 border-ash rounded-2xl flex flex-col items-center justify-center">
-            <Image src={image} width={300} height={175} className="rounded-t-2xl" />
-            <div>
-            <p className="w-full p-2 text-base font-semibold text-center text-ash">{description}</p>
-            </div>
+            <Link href={`/items/${slug}`}>
+                <a>
+                    <Image src={image} width={300} height={175} className="rounded-t-2xl" />
+                    <div>
+                        <p className="w-full p-2 text-base font-semibold text-center text-ash">{description}</p>
+                    </div>
+                </a>
+            </Link>
             <button className="bg-ash text-white p-2.5 my-2.5 mx-2 w-64 rounded-full" onClick={AddItemToCart}>Add to cart</button>
-        </div>
+        </div> 
     )
 }
 

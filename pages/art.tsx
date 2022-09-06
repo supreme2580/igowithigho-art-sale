@@ -7,19 +7,22 @@ import ProductList from "../components/ProductList"
 import { sanityClient } from "../sanity"
 
 interface Data {
-    items: [
-      {
-        _id: string
-        description: string
-        thumbnail: {
-          asset: {
-            _ref: string
-          }
+  items: [
+    {
+      _id: string
+      description: string
+      thumbnail: {
+        asset: {
+          _ref: string
         }
-        price: number
       }
-    ]
-  }
+      price: string
+      slug: {
+        current: string
+      }
+    }
+  ]
+}
 
 const Art = ({ items }: Data) => {
     return(
@@ -50,7 +53,10 @@ export const getServerSideProps = async() => {
         _id,
         thumbnail,
         description,
-        price
+        price,
+        slug {
+          current
+        }
       }
     `
     const items = await sanityClient.fetch(query)

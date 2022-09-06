@@ -8,11 +8,14 @@ interface Page {
         {
             _id: string
             description: string
-            price: number
+            price: string
             thumbnail: {
                 asset: {
                     _ref: string
                 }
+            }
+            slug: {
+                current: string
             }
         }
     ]
