@@ -1,7 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
-import Message from "./message"
 
 const RecommendedCard = ({ image, description, price, slug, title, id }) => {
     
