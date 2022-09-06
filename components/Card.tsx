@@ -33,7 +33,7 @@ const Card = ({ image, description, id, price }: Data) => {
     }
     return (
         <div className="max-w-[300px] border-2 border-ash rounded-2xl flex flex-col items-center justify-center">
-            <Image src={image} width={300} height={175} />
+            <Image src={image} width={300} height={175} className="rounded-t-2xl" />
             <div>
             <p className="w-full p-2 text-base font-semibold text-center text-ash">{description}</p>
             </div>
