@@ -1,4 +1,3 @@
-import { sanityClient } from "../sanity"
 import RecommendedProductList from "./RecommendedProductList"
 
 interface Data {

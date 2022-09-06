@@ -1,20 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
-import Message from "./message"
-import { messageState } from "../atoms/messageAtom"
-import { useRecoilState } from "recoil"
 
-interface Data {
-    id: string
-    image: string
-    description: string
-    slug: string
-    price: string
-    title: string
-}
-
-const Card = ({ image, description, price, slug, title, id }: Data) => {
+const Card = ({ image, description, price, slug, title, id }) => {
     {
         //const cartItem provides static data for our testing
     }
@@ -36,16 +24,16 @@ const Card = ({ image, description, price, slug, title, id }: Data) => {
         customer_id,
         customer_mail
     }
-    const [status, setStatus] = useRecoilState(messageState)
     const AddItemToCart = () => {
+        document.getElementById(id).innerHTML = "Adding item to cart..."
         function saveItem() {
             fetch("/api/addItem", {
                 method: "POST",
                 body: JSON.stringify(item)
             }).then(() => {
-                setStatus(true)
+                document.getElementById(id).innerHTML = "Item added to cart"
             }).catch(() => {
-                setStatus(false)
+                document.getElementById(id).innerHTML = "Error"
             })
             return true
         }
@@ -61,8 +49,7 @@ const Card = ({ image, description, price, slug, title, id }: Data) => {
                     </div>
                 </a>
             </Link>
-            <button className="bg-ash text-white p-2.5 my-2.5 mx-2 w-64 rounded-full" onClick={AddItemToCart}>Add to cart</button>
-        <Message />
+            <button className="bg-ash text-white p-2.5 my-2.5 mx-2 w-64 rounded-full" id={id} onClick={AddItemToCart}>Add to cart</button>
     </div> 
     )
 }
