@@ -1,15 +1,13 @@
 import Image from "next/image"
 
-interface CardData {
-    data: {
-        id: String
-        name: String
-        image: String
-        price: String
-    }
+interface Data {
+    id: string
+    image: string
+    description: string
+    price: number
 }
 
-const Card = () => {
+const Card = ({ image, description, id, price }: Data) => {
     {
         //const cartItem provides static data for our testing
     }
@@ -35,9 +33,9 @@ const Card = () => {
     }
     return (
         <div className="max-w-[300px] border-2 border-ash rounded-2xl flex flex-col items-center justify-center">
-            <Image src="/cardImg.png" width={300} height={175} />
+            <Image src={image} width={300} height={175} />
             <div>
-            <p className="w-full p-2 text-base font-semibold text-center text-ash">Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="w-full p-2 text-base font-semibold text-center text-ash">{description}</p>
             </div>
             <button className="bg-ash text-white p-2.5 my-2.5 mx-2 w-64 rounded-full" onClick={AddItemToCart}>Add to cart</button>
         </div>

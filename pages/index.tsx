@@ -5,8 +5,24 @@ import Hero from '../components/Hero'
 import IFrame from '../components/IFrame'
 import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
+import { sanityClient, urlFor } from "../sanity"
 
-const Home = () => {
+interface Data {
+  items: [
+    {
+      _id: string
+      description: string
+      thumbnail: {
+        asset: {
+          _ref: string
+        }
+      }
+      price: number
+    }
+  ]
+}
+
+const Home = ({ items }: Data) => {
   return (
     <div>
       <Head>
@@ -20,9 +36,9 @@ const Home = () => {
       <Navbar page={"home"} />
       <div className="absolute inset-x-0 top-0 h-full mt-24">
         <main className="space-y-8">
-            <Hero />
+            <Hero image={urlFor(items[0].thumbnail.asset._ref).url()} description={items[0].description} id={items[0]._id} price={items[0].price} />
             <div className="px-2.5 sm:px-16 pt-10"><IFrame /></div>
-            <AvailableProducts page={"home"} />
+            <AvailableProducts page={"home"} data={items} />
             <Newsletter />
             <Footer />
         </main>
@@ -32,3 +48,20 @@ const Home = () => {
 }
 
 export default Home
+
+export const getServerSideProps = async() => {
+  const query = `
+    *[_type == "items"]{
+      _id,
+      thumbnail,
+      description,
+      price
+    }
+  `
+  const items = await sanityClient.fetch(query)
+  return {
+    props: {
+      items
+    }
+  }
+}
