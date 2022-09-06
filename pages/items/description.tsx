@@ -4,8 +4,27 @@ import Recommendation from "../../components/Recommendation"
 import ItemNewsletter from "../../components/ItemNewsletter"
 import ItemFooter from "../../components/ItemFooter"
 import Head from "next/head"
+import { sanityClient } from "../../sanity"
 
-const Description = () => {
+interface Data {
+    items: [
+      {
+        _id: string
+        description: string
+        thumbnail: {
+          asset: {
+            _ref: string
+          }
+        }
+        price: string
+        slug: {
+          current: string
+        }
+      }
+    ]
+  }
+
+const Description = ({ items }: Data) => {
     return(
         <div>
             <Head>
@@ -22,7 +41,7 @@ const Description = () => {
                 {
                         //recommendations
                 }
-                <Recommendation />
+                <Recommendation items={items} />
                 <ItemNewsletter />
                 <ItemFooter />
             </main>
@@ -31,3 +50,23 @@ const Description = () => {
 }
 
 export default Description
+
+export const getServerSideProps = async() => {
+    const query = `
+      *[_type == "items"]{
+        _id,
+        thumbnail,
+        description,
+        price,
+        slug {
+          current
+        }
+      }
+    `
+    const items = await sanityClient.fetch(query)
+    return {
+      props: {
+        items
+      }
+    }
+  }
