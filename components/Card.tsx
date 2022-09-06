@@ -19,12 +19,17 @@ const Card = ({ image, description, price, slug, title, id }: Data) => {
     const customer_name = session?.user?.name
     const customer_id = session?.user?.id
     const customer_mail = session?.user?.email
+    const cost = Number(price)
+    const name = customer_name
+    const product_id = id
+    const product_name = name
+    const thumbnail = image
     const item = {
-        image,
-        title,
-        price,
-        id,
-        customer_name,
+        thumbnail,
+        product_name,
+        cost,
+        product_id,
+        name,
         customer_id,
         customer_mail
     }
@@ -36,6 +41,12 @@ const Card = ({ image, description, price, slug, title, id }: Data) => {
             //this function adds the item to cart in sanity cms
         }
         function saveItem() {
+            fetch("/api/addItem", {
+                method: "POST",
+                body: JSON.stringify(item)
+            }).then(() => {
+                console.log("Submitted")
+            }).catch(error => console.log(error))
             console.log("Save Item")
             return true
         }

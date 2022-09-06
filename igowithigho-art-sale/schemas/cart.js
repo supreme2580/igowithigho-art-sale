@@ -29,8 +29,13 @@ export default {
             type: "string"
         },
         {
+            title: "Customer Email",
+            name: "customer_mail",
+            type: "string"
+        },
+        {
             title: "Item price",
-            name: "price",
+            name: "cost",
             type: "number"
         }
     ]
