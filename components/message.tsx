@@ -7,9 +7,11 @@ const Message = () => {
     const [status, setStatus] = useRecoilState(messageState)
     useEffect(() => {
         status ? message = "Item added to cart" : message = "Error adding item to cart"
-        setTimeout(() => {
-            setStatus(false)
-        }, 2000);
+        if (status) {
+            setTimeout(() => {
+                setStatus(false)
+            }, 2000);
+        }
     }, [status])
     return (
         <div className={`${status ? "bg-green" : "bg-red-600"} p-2 absolute bottom-0 right-0 mb-28 mr-5 text-white font-semibold ${status ? "block" : "hidden"}`}>

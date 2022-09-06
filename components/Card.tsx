@@ -2,9 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import Message from "./message"
-import { messageState, waitingState } from "../atoms/messageAtom"
+import { messageState } from "../atoms/messageAtom"
 import { useRecoilState } from "recoil"
-import Waiting from "./Waiting"
 
 interface Data {
     id: string
@@ -38,9 +37,7 @@ const Card = ({ image, description, price, slug, title, id }: Data) => {
         customer_mail
     }
     const [status, setStatus] = useRecoilState(messageState)
-    const [waiting, setWaiting] = useRecoilState(waitingState)
     const AddItemToCart = () => {
-        setWaiting(true)
         function saveItem() {
             fetch("/api/addItem", {
                 method: "POST",
@@ -66,7 +63,6 @@ const Card = ({ image, description, price, slug, title, id }: Data) => {
             </Link>
             <button className="bg-ash text-white p-2.5 my-2.5 mx-2 w-64 rounded-full" onClick={AddItemToCart}>Add to cart</button>
         <Message />
-        <Waiting />
     </div> 
     )
 }

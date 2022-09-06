@@ -26,7 +26,7 @@ const Hero = ({ image, description, id, price, slug, title }: Data) => {
                 </div>
                 <div>
                     <div className="flex items-center justify-center">
-                    <Card image={image} description={description} id={id} slug={slug} price={price} title={title} />
+                        <Card image={image} description={description} id={id} slug={slug} price={price} title={title} />
                     </div>
                 </div>
             </div>
