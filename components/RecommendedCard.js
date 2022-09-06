@@ -59,7 +59,6 @@ const RecommendedCard = ({ image, description, price, slug, title, id }) => {
                 </Link>
                 <button className="bg-white text-green p-2.5 my-2.5 mx-2 w-64 rounded-full" id={id} onClick={AddItemToCart}>Add to cart</button>
             </div>
-            <Message />
         </div>
     )
 }
