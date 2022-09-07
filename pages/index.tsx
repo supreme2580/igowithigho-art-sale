@@ -6,6 +6,9 @@ import IFrame from '../components/IFrame'
 import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
 import { sanityClient, urlFor } from "../sanity"
+import { emailAddress } from "../atoms/emailAtom"
+import { useRecoilState } from "recoil"
+import { useSession } from 'next-auth/react'
 
 interface Data {
   items: [
@@ -27,6 +30,10 @@ interface Data {
 }
 
 const Home = ({ items }: Data) => {
+  const { data: session } = useSession()
+  const [email, setEmail] = useRecoilState(emailAddress)
+  const mail = session?.user?.email || ""
+  setEmail(mail)
   return (
     <div>
       <Head>

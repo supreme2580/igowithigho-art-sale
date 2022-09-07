@@ -6,14 +6,20 @@ import Footer from "../components/Footer"
 import Head from "next/head"
 import { sanityClient } from "../sanity"
 import { useEffect } from "react"
+import Script from "next/script"
+import { emailAddress } from "../atoms/emailAtom"
+import { useRecoilState } from "recoil"
 
 const Cart = ({ data }) => {
     let prices = []
+    let amountToPay
+    const [email, setEmail] = useRecoilState(emailAddress)
     function getPrice () {
         data.map(costs => prices.push(costs.cost))
         let arrDiff = prices.length-data.length
         prices.splice(0, arrDiff)
         let sum = prices.reduce(((a, b) => a + b), 0)
+        amountToPay = sum
         document.getElementById("checkout").innerHTML = "Checkout $"+sum
     }
     function reCalculate(price, index) {
@@ -21,9 +27,33 @@ const Cart = ({ data }) => {
         let arrDiff = prices.length-data.length
         prices.splice(0, arrDiff)
         const sum = prices.reduce(((a, b) => a + b), 0)
+        amountToPay = sum
         document.getElementById("checkout").innerHTML = "Checkout $"+sum
     }
     useEffect(() => {getPrice()}, [])
+    const pay = () => {
+        const doc = document.getElementById("address")
+        if (doc.value != "") {
+            console.log(email)
+            doc.style = "border: 1px solid #F1F5F9"
+            PaystackPop.setup({
+                key: process.env.NEXT_PUBLIC_PUBLIC_KEY, // Replace with your public key
+                email: email,
+                amount: amountToPay * 100,
+                ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+                // label: "Optional string that replaces customer email"
+                onClose: function(){
+                  alert('Window closed.');
+                },
+                callback: function(response){
+                  alert("The transaction status is => "+response.status)
+                }
+              }).openIframe()
+        }
+        else {
+            doc.style = "border: 1px solid #FF0000"
+        }
+    }
     return(
         <div>
             <Head>
@@ -31,6 +61,7 @@ const Cart = ({ data }) => {
                 <meta name="description" content="igowithIGHO Art Sale" />
                 <link rel="icon" href="/logo.png" />
             </Head>
+            <Script src="https://js.paystack.co/v1/inline.js" />
             <Navbar page={""} />
             <div className="absolute inset-x-0 top-0 h-full mt-24 bg-lightBg">
                 <main className="space-y-8 bg-white">
@@ -111,8 +142,8 @@ const Cart = ({ data }) => {
                                     <h2 className="text-base font-semibold py-2.5">$200</h2>
                                 </div>
                                 <p className="text-xs">Your full address should contain your state and country name</p>
-                                <input type="text" placeholder="Enter your full house address" className="p-2.5 border border-lightBg w-full outline-none" />
-                                <button className="w-full text-lg font-semibold text-white bg-green p-2.5" id="checkout">Checkout $0</button>
+                                <input type="text" id="address" placeholder="Enter your full house address" className="p-2.5 border border-lightBg w-full outline-none" />
+                                <button className="w-full text-lg font-semibold text-white bg-green p-2.5" id="checkout" onClick={pay}>Checkout $0</button>
                             </div>
                         </div>
                     </div>
