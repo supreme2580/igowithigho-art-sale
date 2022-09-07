@@ -23,19 +23,26 @@ export default async function addItem(
         customer_mail
     } = JSON.parse(req.body)
     try {
-      await client.create({
-        _type: "cart",
-        thumbnail,
-        product_name,
-        cost,
-        product_id,
-        name,
-        customer_id,
-        customer_mail
-      })
+      const query = `
+        *[_type == "cart" && product_id == "${product_id}"][0]{
+            product_id
+        }
+      `
+      const result = await client.fetch(query)
+      if (!(result.product_id == product_id)) {
+        await client.create({
+          _type: "cart",
+          thumbnail,
+          product_name,
+          cost,
+          product_id,
+          name,
+          customer_id,
+          customer_mail
+        })
+      }
     } catch (err) {
       return res.status(500).json({message: "Couldn't submit item", err})
     }
     res.status(200).json({ message: "Item submitted" })
   }
-  
