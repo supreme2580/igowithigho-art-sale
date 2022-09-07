@@ -8,14 +8,18 @@ import { sanityClient } from "../sanity"
 import { useEffect } from "react"
 
 const Cart = ({ data }) => {
-    function getPrice (){
+    const priceList = []
+    function getPrice () {
         const prices = []
         data.map(costs => prices.push(costs.cost))
         let sum = prices.reduce(((a, b) => a + b), 0)
-        data.map(item => prices.push(item.cost))
+        data.map(item => priceList.push(item.cost))
         console.log(sum)
         console.log(prices)
         document.getElementById("checkout").innerHTML = "Checkout $"+sum
+    }
+    function reCalculate() {
+
     }
 
     useEffect(() => {getPrice()}, [])
