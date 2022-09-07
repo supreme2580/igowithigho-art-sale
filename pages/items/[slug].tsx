@@ -50,7 +50,6 @@ interface Data {
   }
 
 const Description = ({items, info}: Data) => {
-  console.log(items)
     return(
         <div>
             <Head>

@@ -20,8 +20,8 @@ const SideNav = ({ page }: Page) => {
                     {
                         session != null ?
                             <Profile
-                                image={session.user.image}
-                                name={session.user.name}
+                                image={session?.user?.image}
+                                name={session?.user?.name}
                             /> : <Link href="/auth/signin">
                                     <a>
                                         <div className="px-6 py-2 text-white rounded-full bg-ash">
@@ -47,7 +47,7 @@ const SideNav = ({ page }: Page) => {
                         <h2 className="w-full p-3 hover:bg-lightBg hover:cursor-pointer">Initiative</h2>
                     </a>
                 </Link>
-                <Link href="/cart">
+                <Link href={`/cart?user=${session?.user?.id}`}>
                     <a className="text-lg">
                         <h2 className="w-full p-3 hover:bg-lightBg hover:cursor-pointer">Cart</h2>
                     </a>

@@ -45,7 +45,7 @@ const Navbar = ({ page }: Page) => {
                     <h3 className={`text-lg ${page == "init" && "font-bold"}`}><Link href="/"><a>Initiative</a></Link></h3>
                 </div>
                 <div className="items-center justify-between hidden space-x-4 md:flex">
-                    <div><Link href="/cart"><a><ShoppingCartIcon className="w-6 h-6" /></a></Link></div>
+                    <div><Link href={`/cart?user=${session?.user?.id}`}><a><ShoppingCartIcon className="w-6 h-6" /></a></Link></div>
                     {
                         /**
                          * check if the name in a session exists to determine logged in or not
