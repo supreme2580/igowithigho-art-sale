@@ -13,7 +13,7 @@ const Hero = ({ image, description, id, price, slug, title }: Data) => {
     return(
         <div className="flex justify-center px-2.5 sm:px-16 pt-10">
             <div className="w-full space-y-5 flex flex-col md:flex-row items-center md:space-y-0 space-x-0 md:space-x-5 md:max-w-4xl">
-                <div className="space-y-6">
+                <div className="space-y-6 flex-1">
                     <h1 className="text-3xl lg:text-6xl text-center lg:text-left font-bold text-ash">
                         Lorem ipsum dolor sit met, <span className="text-green">consectetur</span> adipiscing elit
                     </h1>

@@ -40,7 +40,7 @@ const Card = ({ image, description, price, slug, title, id }) => {
         saveItem()
     }
     return (
-        <div className="max-w-[300px] border-2 border-ash rounded-2xl flex flex-col items-center justify-center">
+        <div className="max-w-[300px] min-w-[300px] lg:min-w-[250px] border-2 border-ash rounded-2xl flex flex-col items-center justify-center">
             <Link href={`/items/${slug}`}>
                 <a>
                     <Image src={image} width={300} height={175} className="rounded-t-2xl" />
@@ -49,7 +49,11 @@ const Card = ({ image, description, price, slug, title, id }) => {
                     </div>
                 </a>
             </Link>
-            <button className="bg-ash text-white p-2.5 my-2.5 mx-2 w-64 rounded-full" id={id} onClick={AddItemToCart}>Add to cart</button>
+            {
+                session?.user.name && (
+                    <button className="bg-ash text-white p-2.5 my-2.5 mx-2 w-64 rounded-full" id={id} onClick={AddItemToCart}>Add to cart</button>
+                ) 
+            }
     </div> 
     )
 }

@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
 
 const RecommendedCard = ({ image, description, price, slug, title, id }) => {
     
@@ -52,12 +53,16 @@ const RecommendedCard = ({ image, description, price, slug, title, id }) => {
             <div className="bg-green rounded-b-xl">
                 <Link href={`/items/${slug}`}>
                     <a>
-                    <div>
-                        <p className="w-full p-2 text-base font-semibold text-center text-white">{description}</p>
-                    </div>
+                        <div>
+                            <p className="w-full p-2 text-base font-semibold text-center text-white">{description}</p>
+                        </div>
                     </a>
                 </Link>
-                <button className="bg-white text-green p-2.5 my-2.5 mx-2 w-64 rounded-full" id={id} onClick={AddItemToCart}>Add to cart</button>
+                {
+                    session?.user.name && (
+                        <button className="bg-ash text-white p-2.5 my-2.5 mx-2 w-64 rounded-full" id={id} onClick={AddItemToCart}>Add to cart</button>
+                    ) 
+                }
             </div>
         </div>
     )
