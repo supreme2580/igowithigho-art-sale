@@ -21,6 +21,7 @@ const Cart = ({ data }) => {
         let sum = prices.reduce(((a, b) => a + b), 0)
         amountToPay = sum
         document.getElementById("checkout").innerHTML = "Checkout $"+sum
+        document.getElementById("total").innerHTML = "Checkout $"+sum
     }
     function reCalculate(price, index) {
         prices[index] = price
@@ -29,6 +30,7 @@ const Cart = ({ data }) => {
         const sum = prices.reduce(((a, b) => a + b), 0)
         amountToPay = sum
         document.getElementById("checkout").innerHTML = "Checkout $"+sum
+        document.getElementById("total").innerHTML = "Checkout $"+sum
     }
     useEffect(() => {getPrice()}, [])
     const pay = () => {
@@ -139,7 +141,7 @@ const Cart = ({ data }) => {
                                 <div className="h-[2px] bg-lightBg space-y-2" />
                                 <div className="flex justify-between">
                                     <h2 className="text-base font-semibold py-2.5">Subtotal</h2>
-                                    <h2 className="text-base font-semibold py-2.5">$200</h2>
+                                    <h2 className="text-base font-semibold py-2.5" id="total">$0</h2>
                                 </div>
                                 <p className="text-xs">Your full address should contain your state and country name</p>
                                 <input type="text" id="address" placeholder="Enter your full house address" className="p-2.5 border border-lightBg w-full outline-none" />
