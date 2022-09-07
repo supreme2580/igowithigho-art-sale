@@ -8,23 +8,22 @@ import { sanityClient } from "../sanity"
 import { useEffect } from "react"
 
 const Cart = ({ data }) => {
-    const priceList = []
+    let prices = []
     function getPrice () {
-        const prices = []
         data.map(costs => prices.push(costs.cost))
+        let arrDiff = prices.length-data.length
+        prices.splice(0, arrDiff)
         let sum = prices.reduce(((a, b) => a + b), 0)
-        data.map(item => priceList.push(item.cost))
-        console.log(sum)
-        console.log(prices)
         document.getElementById("checkout").innerHTML = "Checkout $"+sum
     }
-    function reCalculate() {
-
+    function reCalculate(price, index) {
+        prices[index] = price
+        let arrDiff = prices.length-data.length
+        prices.splice(0, arrDiff)
+        const sum = prices.reduce(((a, b) => a + b), 0)
+        document.getElementById("checkout").innerHTML = "Checkout $"+sum
     }
-
     useEffect(() => {getPrice()}, [])
-    
-    
     return(
         <div>
             <Head>
@@ -65,10 +64,11 @@ const Cart = ({ data }) => {
                                                                         val -= 1
                                                                     }
                                                                     item.value = val
-                                                                    let price = 100 * val
+                                                                    let price = info.cost * val
                                                                     item.value = val
                                                                     const priceId = info.product_id+"price"
                                                                     document.getElementById(priceId).innerHTML = "= $" + price
+                                                                    reCalculate(price, index)
                                                                 }}>-</button>
                                                                 <input type="text" value="1" id={info.product_id} className="w-8 text-center text-black border-2 outline-none border-x-green border-y-white" readOnly />
                                                                 <button className="w-8 text-2xl font-semibold text-center" onClick={() => {
@@ -76,10 +76,11 @@ const Cart = ({ data }) => {
                                                                     let val = Number(item?.value)
                                                                     val += 1
                                                                     item.value = val
-                                                                    let price = 100 * val
+                                                                    let price = info.cost * val
                                                                     item.value = val
                                                                     const priceId = info.product_id+"price"
                                                                     document.getElementById(priceId).innerHTML = "= $" + price
+                                                                    reCalculate(price, index)
                                                                 }}>+</button>
                                                             </div>
                                                         </div>
