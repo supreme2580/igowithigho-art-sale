@@ -5,11 +5,22 @@ import Newsletter from "../components/Newsletter"
 import Footer from "../components/Footer"
 import Head from "next/head"
 import { sanityClient } from "../sanity"
+import { useEffect } from "react"
 
 const Cart = ({ data }) => {
-    const increase = () => {
-
+    function getPrice (){
+        const prices = []
+        data.map(costs => prices.push(costs.cost))
+        let sum = prices.reduce(((a, b) => a + b), 0)
+        data.map(item => prices.push(item.cost))
+        console.log(sum)
+        console.log(prices)
+        document.getElementById("checkout").innerHTML = "Checkout $"+sum
     }
+
+    useEffect(() => {getPrice()}, [])
+    
+    
     return(
         <div>
             <Head>
@@ -33,7 +44,7 @@ const Cart = ({ data }) => {
                                         //cart item
                                     }
                                     {
-                                        data.map(info => (
+                                        data.map((info, index) => (
                                             <div className="flex items-center justify-between w-full space-x-2.5" key={info.product_id}>
                                                 <div>
                                                     <Image src={info.thumbnail} width={75} height={75} className="rounded-xl" />
@@ -94,9 +105,9 @@ const Cart = ({ data }) => {
                                     <h2 className="text-base font-semibold py-2.5">Subtotal</h2>
                                     <h2 className="text-base font-semibold py-2.5">$200</h2>
                                 </div>
-                                <p className="text-xs">Your full address should contain your state and country</p>
+                                <p className="text-xs">Your full address should contain your state and country name</p>
                                 <input type="text" placeholder="Enter your full house address" className="p-2.5 border border-lightBg w-full outline-none" />
-                                <button className="w-full text-lg font-semibold text-white bg-green p-2.5">Checkout $200</button>
+                                <button className="w-full text-lg font-semibold text-white bg-green p-2.5" id="checkout">Checkout $0</button>
                             </div>
                         </div>
                     </div>
