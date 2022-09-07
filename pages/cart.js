@@ -7,7 +7,9 @@ import Head from "next/head"
 import { sanityClient } from "../sanity"
 
 const Cart = ({ data }) => {
-    console.log(data)
+    const increase = () => {
+
+    }
     return(
         <div>
             <Head>
@@ -31,18 +33,18 @@ const Cart = ({ data }) => {
                                         //cart item
                                     }
                                     {
-                                        data.map(item => (
-                                            <div className="flex items-center justify-between w-full space-x-2.5">
+                                        data.map(info => (
+                                            <div className="flex items-center justify-between w-full space-x-2.5" key={info.product_id}>
                                                 <div>
-                                                    <Image src="/cardImg.png" width={75} height={75} className="rounded-xl" />
+                                                    <Image src={info.thumbnail} width={75} height={75} className="rounded-xl" />
                                                 </div>
                                                 <div className="flex flex-col flex-wrap items-start flex-1 space-y-1">
-                                                    <h1 className="max-w-[235px] break-words font-semibold">Picture of monalisa</h1>
+                                                    <h1 className="max-w-[235px] break-words font-semibold">{info.product_name}</h1>
                                                     <div className="flex items-center justify-between w-full">
                                                         <div>
                                                             <div className="flex items-center border-2 max-w-auto rounded-xl border-green max-w-[100px]">
                                                                 <button className="w-8 text-2xl font-semibold text-center" onClick={() => {
-                                                                    let item = document.getElementById("haha")
+                                                                    let item = document.getElementById(info.product_id)
                                                                     let val = Number(item?.value)
                                                                     if (val > 1) {
                                                                         val -= 1
@@ -50,17 +52,19 @@ const Cart = ({ data }) => {
                                                                     item.value = val
                                                                     let price = 100 * val
                                                                     item.value = val
-                                                                    document.getElementById("haha"+"price").innerHTML = "= $" + price
+                                                                    const priceId = info.product_id+"price"
+                                                                    document.getElementById(priceId).innerHTML = "= $" + price
                                                                 }}>-</button>
-                                                                <input type="text" value="1" id="haha" className="w-8 text-center text-black border-2 outline-none border-x-green border-y-white" readOnly />
+                                                                <input type="text" value="1" id={info.product_id} className="w-8 text-center text-black border-2 outline-none border-x-green border-y-white" readOnly />
                                                                 <button className="w-8 text-2xl font-semibold text-center" onClick={() => {
-                                                                    let item = document.getElementById("haha")
+                                                                    let item = document.getElementById(info.product_id)
                                                                     let val = Number(item?.value)
                                                                     val += 1
                                                                     item.value = val
                                                                     let price = 100 * val
                                                                     item.value = val
-                                                                    document.getElementById("haha"+"price").innerHTML = "= $" + price
+                                                                    const priceId = info.product_id+"price"
+                                                                    document.getElementById(priceId).innerHTML = "= $" + price
                                                                 }}>+</button>
                                                             </div>
                                                         </div>
@@ -73,7 +77,7 @@ const Cart = ({ data }) => {
                                                     {
                                                         //create a unique id by joining the unique id with string price
                                                     }
-                                                    <button className="text-lg font-semibold" id="hahaprice">= $100</button>
+                                                    <button className="text-lg font-semibold" id={`${info.product_id}price`}>= ${info.cost}</button>
                                                 </div>
                                             </div>
                                         ))
