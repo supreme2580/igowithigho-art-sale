@@ -42,7 +42,7 @@ const RecommendedCard = ({ image, description, price, slug, title, id }) => {
         saveItem()
     }
     return(
-        <div className="max-w-[300px] flex flex-col items-center justify-center -space-y-2">
+        <div className="max-w-[300px] min-w-[300px] lg:min-w-[250px] flex flex-col items-center justify-center -space-y-2">
             <div>
                 <Link href={`/items/${slug}`}>
                     <a>
