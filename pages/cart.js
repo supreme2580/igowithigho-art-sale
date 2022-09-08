@@ -73,18 +73,6 @@ const Cart = ({data, data1}) => {
             doc.style = "border: 1px solid #FF0000"
         }
     }
-    function removeItem(product_id, customer_id) {
-        const item = {
-            product_id,
-            customer_id
-        }
-        fetch("/api/removeItem", {
-            method: "POST",
-            body: JSON.stringify(item)
-        }).then(() => {
-            window.location.href = "https://igowithigho-art-sale.vercel.app"
-        })
-    }
     
     function storeSale(
         customer_name,
@@ -163,7 +151,19 @@ const Cart = ({data, data1}) => {
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <button onClick={() => removeItem(info.product_id, id)}>
+                                                            <button onClick={() => (
+                                                                const proudct_id = info.product_id
+                                                                const item = {
+                                                                    product_id,
+                                                                    id
+                                                                }
+                                                                fetch("/api/removeItem", {
+                                                                    method: "POST",
+                                                                    body: JSON.stringify(item)
+                                                                }).then(() => {
+                                                                    window.location.href = "https://igowithigho-art-sale.vercel.app"
+                                                                })
+                                                            )}>
                                                                 <TrashIcon className="w-8 h-8" />
                                                             </button>
                                                         </div>
