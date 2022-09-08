@@ -9,11 +9,13 @@ import { useEffect } from "react"
 import Script from "next/script"
 import { emailAddress } from "../atoms/emailAtom"
 import { useRecoilState } from "recoil"
+import { nameAtom } from "../atoms/nameAtom"
 
-const Cart = ({ data, id }) => {
+const Cart = ({ data, data1 }) => {
     let prices = []
     let amountToPay
     const [email, setEmail] = useRecoilState(emailAddress)
+    const [name, setName] = useRecoilState(nameAtom)
     function getPrice () {
         data.map(costs => prices.push(costs.cost))
         let arrDiff = prices.length-data.length
@@ -35,8 +37,15 @@ const Cart = ({ data, id }) => {
     useEffect(() => {getPrice()}, [])
     const pay = () => {
         const doc = document.getElementById("address")
+        data1.map(item => {
+            delete item.cost
+            delete item.customer_id
+            delete item.customer_mail
+            delete item.name
+            delete item.thumbnail
+            item._key = Math.random()
+    })
         if (doc.value != "") {
-            console.log(email)
             doc.style = "border: 1px solid #F1F5F9"
             PaystackPop.setup({
                 key: process.env.NEXT_PUBLIC_PUBLIC_KEY, // Replace with your public key
@@ -48,7 +57,9 @@ const Cart = ({ data, id }) => {
                   alert('Window closed.');
                 },
                 callback: function(response){
-                  alert("The transaction status is => "+response.status)
+                    if (response.status == "success") {
+                        storeSale(name, false, document.getElementById("address").value, data1,"$" + amountToPay)
+                    }
                 }
               }).openIframe()
         }
@@ -67,6 +78,22 @@ const Cart = ({ data, id }) => {
             body: JSON.stringify(item)
         }).then(() => {
             window.location.reload()
+        })
+    }
+    function storeSale(
+        customer_name,
+        shipped_out,
+        address,
+        items,
+        price
+    ) {
+        const _key = "Hi"
+        const item = {customer_name, shipped_out, address, items, price}
+        fetch("/api/storeSale", {
+            method: "POST",
+            body: JSON.stringify(item)
+        }).then(() => {
+            document.getElementById("checkout").innerHTML = "Item Purchased"
         })
     }
     return(
@@ -186,10 +213,11 @@ export async function getServerSideProps(context) {
         }
     `
     const data = await sanityClient.fetch(query)
+    const data1 = data
     return {
         props: {
             data,
-            id
+            data1
         }
     }
 }

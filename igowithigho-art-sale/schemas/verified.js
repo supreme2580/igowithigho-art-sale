@@ -4,6 +4,11 @@ export default {
     type: "document",
     fields: [
         {
+            name: "customer_name",
+            title: "Customer Name",
+            type: "string"
+        },
+        {
             name: "shipped_out",
             title: "Shipped out",
             type: "boolean"
@@ -17,7 +22,19 @@ export default {
             name: "items",
             title: "Items",
             type: "array",
-            of: [{type: "string"}]
+            of: [
+                {
+                    type: "object",
+                    fields: [
+                        {
+                            name: "product_name", type: "string", title: "Product Name",
+                        },
+                        {
+                            name: "product_id", type: "string", title: "Product Id"
+                        }
+                    ]
+                }
+            ]
         },
         {
             name: "price",

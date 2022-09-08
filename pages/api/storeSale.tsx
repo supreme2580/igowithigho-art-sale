@@ -10,16 +10,26 @@ const config = {
 
 const client = sanityClient(config)
 
-export default async function removeItem(
+export default async function storeSale(
     req: NextApiRequest,
     res: NextApiResponse
   ) {
     const {
-        product_id,
-        customer_id
+        customer_name,
+        shipped_out,
+        address,
+        items,
+        price
     } = JSON.parse(req.body)
     try {
-        await client.delete({query: `*[_type == "cart" && product_id == "${product_id}" && customer_id == "${customer_id}"]`}).then(console.log).catch(console.error)
+        await client.create({
+            _type: "verified",
+            customer_name,
+            shipped_out,
+            address,
+            items,
+            price
+        })
     } catch (err) {
       return res.status(500).json({message: "Couldn't submit item", err})
     }
