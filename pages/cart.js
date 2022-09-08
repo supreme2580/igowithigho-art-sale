@@ -16,7 +16,11 @@ const Cart = () => {
     const { data: session } = useSession()
 let data
 let data1
-async function getCartItems() {
+
+    const name = session?.user?.name
+    const email = session?.user?.email
+    const id = session?.user?.id
+    function getPrice () {
 const query = `
         *[_type == "cart" && customer_id == "${id}"]{
             thumbnail,
@@ -30,11 +34,6 @@ const query = `
     `
     data = await sanityClient.fetch(query)
     data1 = await sanityClient.fetch(query)
-}
-    const name = session?.user?.name
-    const email = session?.user?.email
-    const id = session?.user?.id
-    function getPrice () {
         data?.map(costs => prices.push(costs.cost))
         let arrDiff = prices.length-data.length
         prices.splice(0, arrDiff)
@@ -52,7 +51,7 @@ const query = `
         document.getElementById("checkout").innerHTML = "Checkout $"+sum
         document.getElementById("total").innerHTML = "Checkout $"+sum
     }
-useEffect(() => {getCartItems()}, [])
+
     useEffect(() => {getPrice()}, [])
 
     const pay = () => {
