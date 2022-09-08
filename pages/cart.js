@@ -217,6 +217,8 @@ const query = `
     `
     const data = await sanityClient.fetch(query)
 const data1 = data
+const { res } = context;
+  res.setHeader('Cache-Control', `no-cache, no-store, max-age=0, must-revalidate`)
 return {
 props: {data, data1}
 }
