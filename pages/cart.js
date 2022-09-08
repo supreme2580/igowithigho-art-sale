@@ -151,7 +151,7 @@ const Cart = ({data, data1}) => {
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <button onClick={() => (
+                                                            <button onClick={() => {
                                                                 const proudct_id = info.product_id
                                                                 const item = {
                                                                     product_id,
@@ -163,7 +163,7 @@ const Cart = ({data, data1}) => {
                                                                 }).then(() => {
                                                                     window.location.href = "https://igowithigho-art-sale.vercel.app"
                                                                 })
-                                                            )}>
+                                                            }}>
                                                                 <TrashIcon className="w-8 h-8" />
                                                             </button>
                                                         </div>
