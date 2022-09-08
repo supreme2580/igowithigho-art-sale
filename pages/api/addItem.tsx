@@ -24,7 +24,7 @@ export default async function addItem(
     } = JSON.parse(req.body)
     try {
       const query = `
-        *[_type == "cart" && product_id == "${product_id}"][0]{
+        *[_type == "cart" && product_id == "${product_id}" && customer_id == "${customer_id}"][0]{
             product_id
         }
       `
