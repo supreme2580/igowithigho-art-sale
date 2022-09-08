@@ -150,7 +150,6 @@ const Cart = ({data, data1}) => {
                                                                 }}>+</button>
                                                             </div>
                                                         </div>
-{console.log(info)}
                                                         <div>
                                                             <button onClick={() => {
                                                                 const item = {
