@@ -9,18 +9,11 @@ import { useEffect } from "react"
 import Script from "next/script"
 import { useSession } from "next-auth/react"
 
-const Cart = () => {
+const Cart = async () => {
 
     let prices = []
     let amountToPay
     const { data: session } = useSession()
-let data
-let data1
-
-    const name = session?.user?.name
-    const email = session?.user?.email
-    const id = session?.user?.id
-    async function getPrice () {
 const query = `
         *[_type == "cart" && customer_id == "${id}"]{
             thumbnail,
@@ -32,8 +25,12 @@ const query = `
             customer_mail
         }
     `
-    data = await sanityClient.fetch(query)
-    data1 = await sanityClient.fetch(query)
+    const data = await sanityClient.fetch(query)
+    const data1 = await sanityClient.fetch(query)
+    const name = session?.user?.name
+    const email = session?.user?.email
+    const id = session?.user?.id
+    function getPrice () {
         data?.map(costs => prices.push(costs.cost))
         let arrDiff = prices.length-data.length
         prices.splice(0, arrDiff)
