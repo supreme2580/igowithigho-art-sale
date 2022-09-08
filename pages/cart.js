@@ -9,18 +9,15 @@ import { useEffect } from "react"
 import Script from "next/script"
 import { useSession } from "next-auth/react"
 
-const Cart = ({data, data1}) => {
-
+const Cart = ({ data, data1 }) => {
     let prices = []
     let amountToPay
     const { data: session } = useSession()
-
     const name = session?.user?.name
     const email = session?.user?.email
     const id = session?.user?.id
-
     function getPrice () {
-        data?.map(costs => prices.push(costs.cost))
+        data.map(costs => prices.push(costs.cost))
         let arrDiff = prices.length-data.length
         prices.splice(0, arrDiff)
         let sum = prices.reduce(((a, b) => a + b), 0)
@@ -37,12 +34,11 @@ const Cart = ({data, data1}) => {
         document.getElementById("checkout").innerHTML = "Checkout $"+sum
         document.getElementById("total").innerHTML = "Checkout $"+sum
     }
-
     useEffect(() => {getPrice()}, [])
 
     const pay = () => {
         const doc = document.getElementById("address")
-        data1?.map(item => {
+        data1.map(item => {
             delete item.cost
             delete item.customer_id
             delete item.customer_mail
@@ -65,6 +61,7 @@ const Cart = ({data, data1}) => {
                 callback: function(response){
                     if (response.status == "success") {
                         storeSale(name, false, document.getElementById("address").value, data1,"$" + amountToPay)
+                        removeAll(id)
                     }
                 }
               }).openIframe()
@@ -73,7 +70,27 @@ const Cart = ({data, data1}) => {
             doc.style = "border: 1px solid #FF0000"
         }
     }
-    
+    function removeItem(product_id, customer_id) {
+        const item = {
+            product_id,
+            customer_id
+        }
+        fetch("/api/removeItem", {
+            method: "POST",
+            body: JSON.stringify(item)
+        }).then(() => {
+            window.location.href = "https://igowithigho-art-sale.vercel.app//cart?user="+id
+        })
+    }
+    function removeAll(customer_id) {
+        const item = {customer_id}
+        fetch("/api/removeAll", {
+            method: "POST",
+            body: JSON.stringify(item)
+        }).then(() => {
+            window.location.href = "https://igowithigho-art-sale.vercel.app//cart?user="+id
+        })
+    }
     function storeSale(
         customer_name,
         shipped_out,
@@ -113,7 +130,7 @@ const Cart = ({data, data1}) => {
                                         //cart item
                                     }
                                     {
-                                        data?.map((info, index) => (
+                                        data.map((info, index) => (
                                             <div className="flex items-center justify-between w-full space-x-2.5" key={info.product_id}>
                                                 <div>
                                                     <Image src={info.thumbnail} width={75} height={75} className="rounded-xl" />
@@ -151,18 +168,7 @@ const Cart = ({data, data1}) => {
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <button onClick={() => {
-                                                                const item = {
-                                                                    info.product_id,
-                                                                    id
-                                                                }
-                                                                fetch("/api/removeItem", {
-                                                                    method: "POST",
-                                                                    body: JSON.stringify(item)
-                                                                }).then(() => {
-                                                                    window.location.href = "https://igowithigho-art-sale.vercel.app"
-                                                                })
-                                                            }}>
+                                                            <button onClick={() => removeItem(info.product_id, id)}>
                                                                 <TrashIcon className="w-8 h-8" />
                                                             </button>
                                                         </div>
@@ -201,9 +207,11 @@ const Cart = ({data, data1}) => {
     )
 }
 
-export async function getServerSideProps(context){
-const id = context?.query?.user
-const query = `
+export default Cart
+
+export async function getServerSideProps(context) {
+    const id = context?.query?.user 
+    const query = `
         *[_type == "cart" && customer_id == "${id}"]{
             thumbnail,
             product_name,
@@ -215,12 +223,11 @@ const query = `
         }
     `
     const data = await sanityClient.fetch(query)
-const data1 = data
-const { res } = context;
-  res.setHeader('Cache-Control', `no-cache, no-store, max-age=0, must-revalidate`)
-return {
-props: {data, data1}
+    const data1 = data
+    return {
+        props: {
+            data,
+            data1
+        }
+    }
 }
-}
-
-export default Cart
