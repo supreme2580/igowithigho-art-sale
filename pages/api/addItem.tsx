@@ -22,6 +22,7 @@ export default async function addItem(
         customer_id,
         customer_mail
     } = JSON.parse(req.body)
+res.setHeader('Cache-Control', 'no-store');
     try {
       const query = `
         *[_type == "cart" && product_id == "${product_id}" && customer_id == "${customer_id}"][0]{
