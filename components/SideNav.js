@@ -1,9 +1,12 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link"
 import Profile from "./Profile";
+import { useRouter } from 'next/router';
 
 const SideNav = ({ page }) => {
     const { data: session } = useSession()
+const router = useRouter();
+const url = "/cart?user="+session?.user?.id
     return (
         <nav className="fixed z-20 w-64 min-h-screen px-3 py-5 space-y-5 transition duration-200 ease-in-out transform -translate-x-full bg-white border-r border-ash sidebar md:hidden">
             <div className="flex flex-col items-center justify-center">
@@ -43,11 +46,10 @@ const SideNav = ({ page }) => {
                         <h2 className="w-full p-3 hover:bg-lightBg hover:cursor-pointer">Initiative</h2>
                     </a>
                 </Link>
-                <Link href={`/cart?user=${session?.user?.id}`}>
-                    <a className="text-lg">
+                <div onClick={() => router.push(url)}>
                         <h2 className="w-full p-3 hover:bg-lightBg hover:cursor-pointer">Cart</h2>
-                    </a>
-                </Link>
+                 
+                </div>
             </div>
         </nav>
     )
