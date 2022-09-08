@@ -203,7 +203,7 @@ const Cart = ({data, data1}) => {
 }
 
 export async function getServerSideProps(context){
-
+const id = context?.query?.user
 const query = `
         *[_type == "cart" && customer_id == "${id}"]{
             thumbnail,
