@@ -215,6 +215,8 @@ export async function getServerSideProps(context) {
     `
     const data = await sanityClient.fetch(query)
     const data1 = await sanityClient.fetch(query)
+console.log(data)
+console.log(data1)
     return {
         props: {
             data,
