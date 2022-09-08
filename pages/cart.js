@@ -20,7 +20,7 @@ let data1
     const name = session?.user?.name
     const email = session?.user?.email
     const id = session?.user?.id
-    function getPrice () {
+    async function getPrice () {
 const query = `
         *[_type == "cart" && customer_id == "${id}"]{
             thumbnail,
