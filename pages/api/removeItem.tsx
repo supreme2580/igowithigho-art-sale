@@ -18,6 +18,7 @@ export default async function removeItem(
         product_id,
         customer_id
     } = JSON.parse(req.body)
+res.setHeader('Cache-Control', 'no-store');
     try {
         await client.delete({query: `*[_type == "cart" && product_id == "${product_id}" && customer_id == "${customer_id}"]`}).then(console.log).catch(console.error)
     } catch (err) {
