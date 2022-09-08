@@ -1,4 +1,4 @@
-import Navbar from "../../components/Navbar"
+import Navbar from "../../../components/Navbar"
 import Head from "next/head"
 import { getProviders, signIn as SignIntoProvider } from "next-auth/react"
 
