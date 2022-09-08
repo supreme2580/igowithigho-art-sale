@@ -14,6 +14,10 @@ const Cart = () => {
     let prices = []
     let amountToPay
     const { data: session } = useSession()
+
+    const name = session?.user?.name
+    const email = session?.user?.email
+    const id = session?.user?.id
 const query = `
         *[_type == "cart" && customer_id == "${id}"]{
             thumbnail,
@@ -27,9 +31,6 @@ const query = `
     `
     const data = async () => await sanityClient.fetch(query)
     const data1 = async () => await sanityClient.fetch(query)
-    const name = session?.user?.name
-    const email = session?.user?.email
-    const id = session?.user?.id
     function getPrice () {
         data?.map(costs => prices.push(costs.cost))
         let arrDiff = prices.length-data.length
