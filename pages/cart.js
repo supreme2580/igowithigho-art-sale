@@ -61,15 +61,6 @@ const Cart = ({ data, data1 }) => {
                 callback: function(response){
                     if (response.status == "success") {
                         storeSale(name, false, document.getElementById("address").value, data1,"$" + amountToPay)
-       
-        const item = {id}
-        fetch("/api/removeAll", {
-            method: "POST",
-            body: JSON.stringify(item)
-        }).then(() => {
-            window.location.href = "https://igowithigho-art-sale.vercel.app/cart?user="+id
-        })
-    
                     }
                 }
               }).openIframe()
