@@ -14,6 +14,9 @@ const Cart = () => {
     let prices = []
     let amountToPay
     const { data: session } = useSession()
+let data
+let data1
+async () => {
 const query = `
         *[_type == "cart" && customer_id == "${id}"]{
             thumbnail,
@@ -25,8 +28,9 @@ const query = `
             customer_mail
         }
     `
-    const data = await sanityClient.fetch(query)
-    const data1 = await sanityClient.fetch(query)
+    data = await sanityClient.fetch(query)
+    data1 = await sanityClient.fetch(query)
+}
     const name = session?.user?.name
     const email = session?.user?.email
     const id = session?.user?.id
