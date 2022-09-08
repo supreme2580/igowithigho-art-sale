@@ -7,15 +7,15 @@ import Head from "next/head"
 import { sanityClient } from "../sanity"
 import { useEffect } from "react"
 import Script from "next/script"
-import { emailAddress } from "../atoms/emailAtom"
-import { useRecoilState } from "recoil"
-import { nameAtom } from "../atoms/nameAtom"
+import { useSession } from "next-auth/react"
 
 const Cart = ({ data, data1 }) => {
     let prices = []
     let amountToPay
-    const [email, setEmail] = useRecoilState(emailAddress)
-    const [name, setName] = useRecoilState(nameAtom)
+    const { data: session } = useSession()
+    const name = session?.user?.name
+    const email = session?.user?.email
+    const id = session?.user?.id
     function getPrice () {
         data.map(costs => prices.push(costs.cost))
         let arrDiff = prices.length-data.length
@@ -35,6 +35,7 @@ const Cart = ({ data, data1 }) => {
         document.getElementById("total").innerHTML = "Checkout $"+sum
     }
     useEffect(() => {getPrice()}, [])
+
     const pay = () => {
         const doc = document.getElementById("address")
         data1.map(item => {
@@ -47,6 +48,7 @@ const Cart = ({ data, data1 }) => {
     })
         if (doc.value != "") {
             doc.style = "border: 1px solid #F1F5F9"
+            getPrice()
             PaystackPop.setup({
                 key: process.env.NEXT_PUBLIC_PUBLIC_KEY, // Replace with your public key
                 email: email,
@@ -54,7 +56,7 @@ const Cart = ({ data, data1 }) => {
                 ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
                 // label: "Optional string that replaces customer email"
                 onClose: function(){
-                  alert('Window closed.');
+                    document.getElementById("checkout").innerHTML = "Item not purchased"
                 },
                 callback: function(response){
                     if (response.status == "success") {
@@ -67,8 +69,7 @@ const Cart = ({ data, data1 }) => {
             doc.style = "border: 1px solid #FF0000"
         }
     }
-    function removeItem(product_id) {
-        let customer_id = id
+    function removeItem(product_id, customer_id) {
         const item = {
             product_id,
             customer_id
@@ -77,7 +78,7 @@ const Cart = ({ data, data1 }) => {
             method: "POST",
             body: JSON.stringify(item)
         }).then(() => {
-            window.location.reload()
+            window.location.href = "http://localhost:3000/cart?user="+id
         })
     }
     function storeSale(
@@ -87,7 +88,6 @@ const Cart = ({ data, data1 }) => {
         items,
         price
     ) {
-        const _key = "Hi"
         const item = {customer_name, shipped_out, address, items, price}
         fetch("/api/storeSale", {
             method: "POST",
@@ -158,7 +158,7 @@ const Cart = ({ data, data1 }) => {
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <button onClick={() => removeItem(info.product_id)}>
+                                                            <button onClick={() => removeItem(info.product_id, id)}>
                                                                 <TrashIcon className="w-8 h-8" />
                                                             </button>
                                                         </div>

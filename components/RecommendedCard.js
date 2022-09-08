@@ -60,7 +60,7 @@ const RecommendedCard = ({ image, description, price, slug, title, id }) => {
                 </Link>
                 {
                     session?.user.name && (
-                        <button className="bg-ash text-white p-2.5 my-2.5 mx-2 w-64 rounded-full" id={id} onClick={AddItemToCart}>Add to cart</button>
+                        <button className="bg-white text-green p-2.5 my-2.5 mx-2 w-64 rounded-full" id={id} onClick={AddItemToCart}>Add to cart</button>
                     ) 
                 }
             </div>

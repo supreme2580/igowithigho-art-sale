@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react"
 import Image from "next/image"
 import { urlFor } from "../sanity"
 import BreadCrumb from "./BreadCrumb"
@@ -27,6 +28,23 @@ const ItemDescription = ({ items }: Data) => {
     if (typeof window != "undefined") {
         href = window.location.href
     }
+    const { data: session } = useSession()
+    const thumbnail = items.thumbnail
+    const product_name = items.title
+    const cost = items.price
+    const product_id = items._id
+    const name = session?.user?.name
+    const customer_id = session?.user?.id
+    const customer_mail = session?.user?.email
+    const item = {
+        thumbnail,
+        product_name,
+        cost,
+        product_id,
+        name,
+        customer_id,
+        customer_mail
+    }
     return(
         <div className="px-2.5 sm:px-16 pt-10 space-y-8">
             <div className="flex justify-center">
@@ -55,7 +73,7 @@ const ItemDescription = ({ items }: Data) => {
                                 }
                                 <Rating stars={items.rating} />
                                 <Share url={href || ""} />
-                                <Buy price={items.price} />
+                                <Buy price={items.price} id={items._id} item={item} />
                             </div>
                         </div>
                     </div>
