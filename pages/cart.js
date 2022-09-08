@@ -35,7 +35,7 @@ const query = `
     const email = session?.user?.email
     const id = session?.user?.id
     function getPrice () {
-        data.map(costs => prices.push(costs.cost))
+        data?.map(costs => prices.push(costs.cost))
         let arrDiff = prices.length-data.length
         prices.splice(0, arrDiff)
         let sum = prices.reduce(((a, b) => a + b), 0)
@@ -56,7 +56,7 @@ const query = `
 
     const pay = () => {
         const doc = document.getElementById("address")
-        data1.map(item => {
+        data1?.map(item => {
             delete item.cost
             delete item.customer_id
             delete item.customer_mail
@@ -139,7 +139,7 @@ const query = `
                                         //cart item
                                     }
                                     {
-                                        data.map((info, index) => (
+                                        data?.map((info, index) => (
                                             <div className="flex items-center justify-between w-full space-x-2.5" key={info.product_id}>
                                                 <div>
                                                     <Image src={info.thumbnail} width={75} height={75} className="rounded-xl" />
