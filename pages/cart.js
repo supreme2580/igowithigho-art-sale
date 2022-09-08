@@ -9,7 +9,7 @@ import { useEffect } from "react"
 import Script from "next/script"
 import { useSession } from "next-auth/react"
 
-const Cart = () => {
+const Cart = ({data, data1}) => {
 
     let prices = []
     let amountToPay
@@ -18,19 +18,7 @@ const Cart = () => {
     const name = session?.user?.name
     const email = session?.user?.email
     const id = session?.user?.id
-const query = `
-        *[_type == "cart" && customer_id == "${id}"]{
-            thumbnail,
-            product_name,
-            cost,
-            product_id,
-            name,
-            customer_id,
-            customer_mail
-        }
-    `
-    const data = async () => await sanityClient.fetch(query)
-    const data1 = async () => await sanityClient.fetch(query)
+
     function getPrice () {
         data?.map(costs => prices.push(costs.cost))
         let arrDiff = prices.length-data.length
@@ -212,6 +200,26 @@ const query = `
             </div>
         </div>
     )
+}
+
+export async function getServerSideProps(context){
+
+const query = `
+        *[_type == "cart" && customer_id == "${id}"]{
+            thumbnail,
+            product_name,
+            cost,
+            product_id,
+            name,
+            customer_id,
+            customer_mail
+        }
+    `
+    const data = await sanityClient.fetch(query)
+const data1 = data
+return {
+props: {data, data1}
+}
 }
 
 export default Cart
