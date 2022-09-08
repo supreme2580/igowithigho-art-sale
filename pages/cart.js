@@ -168,7 +168,10 @@ const Cart = ({ data, data1 }) => {
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <button onClick={() => removeItem(info.product_id, id)}>
+                                                            <button onClick={() => setInterval(() => {
+                                                                document.getElementById("checkout").innerHTML = "Deleting..."
+                                                                removeItem(info.product_id, id)
+                                                            }, 5000)}>
                                                                 <TrashIcon className="w-8 h-8" />
                                                             </button>
                                                         </div>
