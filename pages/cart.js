@@ -87,7 +87,7 @@ const Cart = ({ data, data1 }) => {
             method: "POST",
             body: JSON.stringify(item)
         }).then(() => {
-            window.reload()
+            window.location.href = "https://igowithigho-art-sale.vercel.app"
         })
     }
     
