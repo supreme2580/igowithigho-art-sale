@@ -1,4 +1,6 @@
-export default function getCartItems() {}
+export default function getCartItems({data}) {
+return data
+}
 
 export async function getServerSideProps(context){
 
@@ -14,8 +16,7 @@ const query = `
         }
     `
     const data = await sanityClient.fetch(query)
-    const data1 = await sanityClient.fetch(query)
 return {
-props: {data, data1}
+props: {data}
 }
 }
