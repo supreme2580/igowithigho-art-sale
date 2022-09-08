@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
 import { sanityClient, urlFor } from "../sanity"
 import { emailAddress } from "../atoms/emailAtom"
+import { idAtom } from "../atoms/idAtom"
 import { useRecoilState } from "recoil"
 import { useSession } from 'next-auth/react'
 
@@ -32,8 +33,11 @@ interface Data {
 const Home = ({ items }: Data) => {
   const { data: session } = useSession()
   const [email, setEmail] = useRecoilState(emailAddress)
+  const [id, setId] = useRecoilState(idAtom)
   const mail = session?.user?.email || ""
+  const userId = session?.user?.id || ""
   setEmail(mail)
+  setId(userId)
   return (
     <div>
       <Head>

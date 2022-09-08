@@ -10,7 +10,7 @@ import Script from "next/script"
 import { emailAddress } from "../atoms/emailAtom"
 import { useRecoilState } from "recoil"
 
-const Cart = ({ data }) => {
+const Cart = ({ data, id }) => {
     let prices = []
     let amountToPay
     const [email, setEmail] = useRecoilState(emailAddress)
@@ -55,6 +55,19 @@ const Cart = ({ data }) => {
         else {
             doc.style = "border: 1px solid #FF0000"
         }
+    }
+    function removeItem(product_id) {
+        let customer_id = id
+        const item = {
+            product_id,
+            customer_id
+        }
+        fetch("/api/removeItem", {
+            method: "POST",
+            body: JSON.stringify(item)
+        }).then(() => {
+            window.location.reload()
+        })
     }
     return(
         <div>
@@ -118,7 +131,7 @@ const Cart = ({ data }) => {
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <button>
+                                                            <button onClick={() => removeItem(info.product_id)}>
                                                                 <TrashIcon className="w-8 h-8" />
                                                             </button>
                                                         </div>
@@ -175,7 +188,8 @@ export async function getServerSideProps(context) {
     const data = await sanityClient.fetch(query)
     return {
         props: {
-            data
+            data,
+            id
         }
     }
 }
