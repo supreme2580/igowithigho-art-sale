@@ -198,12 +198,10 @@ const Cart = ({ data, data1 }) => {
     )
 }
 
-export default Cart
-
 export async function getServerSideProps(context) {
 context?.res.setHeader(
     'Cache-Control',
-    'public, s-maxage=1, stale-while-revalidate=1'
+    'no-cache, no-store, max-age=0, must-revalidate'
   )
     const id = context?.query?.user 
     const query = `
@@ -228,3 +226,5 @@ console.log(data1)
         }
     }
 }
+
+export default Cart
