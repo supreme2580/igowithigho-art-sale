@@ -17,6 +17,7 @@ export default async function removeAll(
     const {
         customer_id
     } = JSON.parse(req.body)
+res.setHeader('Cache-Control', 'no-store');
     try {
         await client.delete({query: `*[_type == "cart" && customer_id == "${customer_id}"]`}).then(console.log).catch(console.error)
     } catch (err) {
