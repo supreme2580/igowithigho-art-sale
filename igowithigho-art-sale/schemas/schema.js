@@ -6,6 +6,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 import Items from './items'
 import cart from './cart'
 import verified from './verified'
+import email from './email'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -17,6 +18,7 @@ export default createSchema({
     /* Your types here! */
     Items,
     cart,
-    verified
+    verified,
+    email
   ]),
 })
