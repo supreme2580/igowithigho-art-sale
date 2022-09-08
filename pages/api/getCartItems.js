@@ -1,5 +1,5 @@
 export default function handler({data}) {
-data
+return data
 }
 
 export async function getServerSideProps(context){
