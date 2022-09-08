@@ -16,7 +16,7 @@ const Cart = () => {
     const { data: session } = useSession()
 let data
 let data1
-async () => {
+async function getCartItems() {
 const query = `
         *[_type == "cart" && customer_id == "${id}"]{
             thumbnail,
@@ -52,6 +52,7 @@ const query = `
         document.getElementById("checkout").innerHTML = "Checkout $"+sum
         document.getElementById("total").innerHTML = "Checkout $"+sum
     }
+useEffect(() => {getCartItems()}, [])
     useEffect(() => {getPrice()}, [])
 
     const pay = () => {
