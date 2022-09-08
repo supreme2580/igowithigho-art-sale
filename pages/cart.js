@@ -67,7 +67,7 @@ const Cart = ({ data, data1 }) => {
             method: "POST",
             body: JSON.stringify(item)
         }).then(() => {
-            window.location.href = "https://igowithigho-art-sale.vercel.app//cart?user="+id
+            window.location.href = "https://igowithigho-art-sale.vercel.app/cart?user="+id
         })
     
                     }
@@ -87,7 +87,7 @@ const Cart = ({ data, data1 }) => {
             method: "POST",
             body: JSON.stringify(item)
         }).then(() => {
-            window.location.href = "https://igowithigho-art-sale.vercel.app//cart?user="+id
+            window.location.href = "https://igowithigho-art-sale.vercel.app/cart?user="+id
         })
     }
     
