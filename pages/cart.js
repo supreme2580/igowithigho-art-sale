@@ -9,7 +9,7 @@ import { useEffect } from "react"
 import Script from "next/script"
 import { useSession } from "next-auth/react"
 
-const Cart = async () => {
+const Cart = () => {
 
     let prices = []
     let amountToPay
@@ -25,8 +25,8 @@ const query = `
             customer_mail
         }
     `
-    const data = await sanityClient.fetch(query)
-    const data1 = await sanityClient.fetch(query)
+    const data = async () => await sanityClient.fetch(query)
+    const data1 = async () => await sanityClient.fetch(query)
     const name = session?.user?.name
     const email = session?.user?.email
     const id = session?.user?.id
