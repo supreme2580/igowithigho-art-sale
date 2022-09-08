@@ -217,6 +217,7 @@ context?.res.setHeader(
     `
     const data = await sanityClient.fetch(query)
     const data1 = await sanityClient.fetch(query)
+console.log(context?.res)
 console.log(data)
 console.log(data1)
     return {
