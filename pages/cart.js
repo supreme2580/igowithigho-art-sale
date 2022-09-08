@@ -200,8 +200,8 @@ const Cart = ({ data, data1 }) => {
 
 export default Cart
 
-export async function getServerSideProps(context, {res, req}) {
-res.setHeader(
+export async function getServerSideProps(context) {
+context?.res.setHeader(
 'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate'
 )
     const id = context?.query?.user 
