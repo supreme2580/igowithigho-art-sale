@@ -71,28 +71,28 @@ const Cart = ({ data, data1 }) => {
         }
     }
     function removeItem(product_id, customer_id) {
-        const item = {
-            product_id,
-            customer_id
-        }
-        fetch("/api/removeItem", {
+        document.getElementById("checkout").innerHTML = "Deleting item..."
+        setInterval(() => {
+           const item = {
+                product_id,
+                customer_id
+            }
+            fetch("/api/removeItem", {
+                method: "POST",
+                body: JSON.stringify(item)
+            }).then(() => {
+                window.location.href = "/"
+            }) 
+        }, 5000);
+    }
+    function removeAll(customer_id) {
+        const item = {customer_id}
+        fetch("/api/removeAll", {
             method: "POST",
             body: JSON.stringify(item)
         }).then(() => {
             window.location.href = "https://igowithigho-art-sale.vercel.app//cart?user="+id
         })
-    }
-    function removeAll(customer_id) {
-        setInterval(() => {
-            document.getElementById("checkout").innerHTML = "Deleting item..."
-            const item = {customer_id}
-            fetch("/api/removeAll", {
-                method: "POST",
-                body: JSON.stringify(item)
-            }).then(() => {
-                window.location.href = "https://igowithigho-art-sale.vercel.app//cart?user="+id
-            })
-        }, 5000);
     }
     function storeSale(
         customer_name,
