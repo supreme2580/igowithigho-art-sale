@@ -9,10 +9,24 @@ import { useEffect } from "react"
 import Script from "next/script"
 import { useSession } from "next-auth/react"
 
-const Cart = ({ data, data1 }) => {
+const Cart = () => {
+
     let prices = []
     let amountToPay
     const { data: session } = useSession()
+const query = `
+        *[_type == "cart" && customer_id == "${id}"]{
+            thumbnail,
+            product_name,
+            cost,
+            product_id,
+            name,
+            customer_id,
+            customer_mail
+        }
+    `
+    const data = await sanityClient.fetch(query)
+    const data1 = await sanityClient.fetch(query)
     const name = session?.user?.name
     const email = session?.user?.email
     const id = session?.user?.id
@@ -196,36 +210,6 @@ const Cart = ({ data, data1 }) => {
             </div>
         </div>
     )
-}
-
-export async function getServerSideProps(context) {
-context?.res.setHeader(
-    'Cache-Control',
-    'no-cache, no-store, max-age=0, must-revalidate'
-  )
-    const id = context?.query?.user 
-    const query = `
-        *[_type == "cart" && customer_id == "${id}"]{
-            thumbnail,
-            product_name,
-            cost,
-            product_id,
-            name,
-            customer_id,
-            customer_mail
-        }
-    `
-    const data = await sanityClient.fetch(query)
-    const data1 = await sanityClient.fetch(query)
-console.log(context?.res)
-console.log(data)
-console.log(data1)
-    return {
-        props: {
-            data,
-            data1
-        }
-    }
 }
 
 export default Cart
