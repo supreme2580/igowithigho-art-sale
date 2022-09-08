@@ -1,9 +1,9 @@
-export default function getCartItems({data}) {
-return data
+export default function handler({data}) {
+data
 }
 
 export async function getServerSideProps(context){
-
+const id = context?.query?.user
 const query = `
         *[_type == "cart" && customer_id == "${id}"]{
             thumbnail,
