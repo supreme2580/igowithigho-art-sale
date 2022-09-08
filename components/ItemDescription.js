@@ -6,24 +6,7 @@ import Buy from "./Buy"
 import Rating from "./Rating"
 import Share from "./Share"
 
-    interface Data {
-        items: {
-            _id: string
-              title: string
-              description: string
-              thumbnail: {
-                asset: {
-                  _ref: string
-                }
-              }
-              price: string
-              slug: {
-                current: string
-              }
-              rating: number
-        }
-    }
-const ItemDescription = ({ items }: Data) => {
+const ItemDescription = ({ items }) => {
     let href
     if (typeof window != "undefined") {
         href = window.location.href

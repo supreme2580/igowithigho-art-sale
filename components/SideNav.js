@@ -2,11 +2,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link"
 import Profile from "./Profile";
 
-interface Page {
-    page: string;
-}
-
-const SideNav = ({ page }: Page) => {
+const SideNav = ({ page }) => {
     const { data: session } = useSession()
     return (
         <nav className="fixed z-20 w-64 min-h-screen px-3 py-5 space-y-5 transition duration-200 ease-in-out transform -translate-x-full bg-white border-r border-ash sidebar md:hidden">

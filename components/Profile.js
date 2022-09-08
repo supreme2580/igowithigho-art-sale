@@ -1,11 +1,6 @@
 import { signOut } from "next-auth/react"
 
-interface Image {
-    image: string;
-    name: string;
-}
-
-const Profile = ({ image, name }: Image) => {
+const Profile = ({ image, name }) => {
 
     {
         //collect session data

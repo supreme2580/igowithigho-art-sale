@@ -10,11 +10,7 @@ import SideNav from "./SideNav"
 import { useSession } from "next-auth/react"
 import Profile from "./Profile"
 
-interface Page {
-    page: string;
-}
-
-const Navbar = ({ page }: Page) => {
+export default function Navbar ({ page }) {
     const toggleSideBar = () => {
         document.querySelector(".sidebar")?.classList.toggle("-translate-x-full")
     }
@@ -60,5 +56,3 @@ const Navbar = ({ page }: Page) => {
         </nav>
     )
 }
-
-export default Navbar
