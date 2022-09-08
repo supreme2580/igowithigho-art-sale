@@ -83,13 +83,16 @@ const Cart = ({ data, data1 }) => {
         })
     }
     function removeAll(customer_id) {
-        const item = {customer_id}
-        fetch("/api/removeAll", {
-            method: "POST",
-            body: JSON.stringify(item)
-        }).then(() => {
-            window.location.href = "https://igowithigho-art-sale.vercel.app//cart?user="+id
-        })
+        setInterval(() => {
+            document.getElementById("checkout").innerHTML = "Deleting item..."
+            const item = {customer_id}
+            fetch("/api/removeAll", {
+                method: "POST",
+                body: JSON.stringify(item)
+            }).then(() => {
+                window.location.href = "https://igowithigho-art-sale.vercel.app//cart?user="+id
+            })
+        }, 5000);
     }
     function storeSale(
         customer_name,
@@ -168,10 +171,7 @@ const Cart = ({ data, data1 }) => {
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <button onClick={() => setInterval(() => {
-                                                                document.getElementById("checkout").innerHTML = "Deleting..."
-                                                                removeItem(info.product_id, id)
-                                                            }, 5000)}>
+                                                            <button onClick={() => removeItem(info.product_id, id)}>
                                                                 <TrashIcon className="w-8 h-8" />
                                                             </button>
                                                         </div>
