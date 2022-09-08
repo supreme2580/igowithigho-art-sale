@@ -150,11 +150,11 @@ const Cart = ({data, data1}) => {
                                                                 }}>+</button>
                                                             </div>
                                                         </div>
+{console.log(info)}
                                                         <div>
                                                             <button onClick={() => {
-                                                                const proudct_id = info.product_id
                                                                 const item = {
-                                                                    product_id,
+                                                                    info.product_id,
                                                                     id
                                                                 }
                                                                 fetch("/api/removeItem", {
