@@ -44,10 +44,12 @@ const url = "/cart?user="+session?.user?.id
                         <h2 className="w-full p-3 hover:bg-lightBg hover:cursor-pointer">Initiative</h2>
                     </a>
                 </Link>
-                <div onClick={() => window.location.href = url}>
+<Link href={url}>
+                <a onClick={() => window.location.href = url}>
                         <h2 className="w-full p-3 hover:bg-lightBg hover:cursor-pointer">Cart</h2>
                  
-                </div>
+                </a>
+</Link>
             </div>
         </nav>
     )
