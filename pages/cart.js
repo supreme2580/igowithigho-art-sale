@@ -16,6 +16,100 @@ const Cart = ({ data, data1 }) => {
     const name = session?.user?.name
     const email = session?.user?.email
     const id = session?.user?.id
+    function getPrice () {
+        data.map(costs => prices.push(costs.cost))
+        let arrDiff = prices.length-data.length
+        prices.splice(0, arrDiff)
+        let sum = prices.reduce(((a, b) => a + b), 0)
+        amountToPay = sum
+        document.getElementById("checkout").innerHTML = "Checkout $"+sum
+        document.getElementById("total").innerHTML = "Checkout $"+sum
+    }
+    function reCalculate(price, index) {
+        prices[index] = price
+        let arrDiff = prices.length-data.length
+        prices.splice(0, arrDiff)
+        const sum = prices.reduce(((a, b) => a + b), 0)
+        amountToPay = sum
+        document.getElementById("checkout").innerHTML = "Checkout $"+sum
+        document.getElementById("total").innerHTML = "Checkout $"+sum
+    }
+
+    useEffect(() => getPrice())
+
+    const pay = () => {
+        const doc = document.getElementById("address")
+        data1.map(item => {
+            delete item.cost
+            delete item.customer_id
+            delete item.customer_mail
+            delete item.name
+            delete item.thumbnail
+            item._key = Math.random()
+    })
+        if (doc.value != "") {
+            doc.style = "border: 1px solid #F1F5F9"
+            getPrice()
+            PaystackPop.setup({
+                key: process.env.NEXT_PUBLIC_PUBLIC_KEY, // Replace with your public key
+                email: email,
+                amount: amountToPay * 100,
+                ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+                // label: "Optional string that replaces customer email"
+                onClose: function(){
+                    document.getElementById("checkout").innerHTML = "Item not purchased"
+                },
+                callback: function(response){
+                    if (response.status == "success") {
+                        storeSale(name, false, document.getElementById("address").value, data1,"$" + amountToPay)
+                        removeAll(id)
+                    }
+                }
+              }).openIframe()
+        }
+        else {
+            doc.style = "border: 1px solid #FF0000"
+        }
+    }
+    function removeItem(product_id, customer_id) {
+        document.getElementById("checkout").innerHTML = "Deleting item..."
+        setInterval(() => {
+           const item = {
+                product_id,
+                customer_id
+            }
+            fetch("/api/removeItem", {
+                method: "POST",
+                body: JSON.stringify(item)
+            }).then(() => {
+                window.location.href = "/"
+            }) 
+        }, 5000);
+    }
+    function removeAll(customer_id) {
+        const item = {customer_id}
+        fetch("/api/removeAll", {
+            method: "POST",
+            body: JSON.stringify(item)
+        }).then(() => {
+            window.location.href = "https://igowithigho-art-sale.vercel.app//cart?user="+id
+        })
+    }
+    function storeSale(
+        customer_name,
+        shipped_out,
+        address,
+        items,
+        price
+    ) {
+        const item = {customer_name, shipped_out, address, items, price}
+        fetch("/api/storeSale", {
+            method: "POST",
+            body: JSON.stringify(item)
+        }).then(() => {
+            document.getElementById("checkout").innerHTML = "Item Purchased"
+        })
+    }
     return(
         <div>
             <Head>
@@ -78,7 +172,7 @@ const Cart = ({ data, data1 }) => {
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <button>
+                                                            <button onClick={() => removeItem(info.product_id, id)}>
                                                                 <TrashIcon className="w-8 h-8" />
                                                             </button>
                                                         </div>
@@ -105,7 +199,7 @@ const Cart = ({ data, data1 }) => {
                                 </div>
                                 <p className="text-xs">Your full address should contain your state and country name</p>
                                 <input type="text" id="address" placeholder="Enter your full house address" className="p-2.5 border border-lightBg w-full outline-none" />
-                                <button className="w-full text-lg font-semibold text-white bg-green p-2.5" id="checkout">Checkout $0</button>
+                                <button className="w-full text-lg font-semibold text-white bg-green p-2.5" id="checkout" onClick={pay}>Checkout $0</button>
                             </div>
                         </div>
                     </div>
