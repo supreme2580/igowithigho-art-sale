@@ -9,7 +9,7 @@ import { useEffect } from "react"
 import Script from "next/script"
 import { useSession } from "next-auth/react"
 
-const Cart = () => {
+const Cart = ({data, data1}) => {
     let prices = []
     let amountToPay
     const { data: session } = useSession()
@@ -35,25 +35,6 @@ const Cart = () => {
         document.getElementById("total").innerHTML = "Checkout $"+sum
     }
 
-const [data, setData] = useState([])
-const [data1, setData1] = useState([])
-const query = `
-        *[_type == "cart" && customer_id == "${id}"]{
-            thumbnail,
-            product_name,
-            cost,
-            product_id,
-            name,
-            customer_id,
-            customer_mail
-        }`
-
-useEffect(async () => {
-
-const info = await sanityClient.fetch(query)
-setData(info)
-setData1(info)
-})
     useEffect(() => getPrice())
 
     const pay = () => {
