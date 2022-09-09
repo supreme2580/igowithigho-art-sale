@@ -46,7 +46,7 @@ const query = `
             name,
             customer_id,
             customer_mail
-        }
+        }`
 
 useEffect(async () => {
 
