@@ -49,7 +49,6 @@ const Cart = ({data, data1}) => {
     })
         if (doc.value != "") {
             doc.style = "border: 1px solid #F1F5F9"
-            getPrice()
             PaystackPop.setup({
                 key: process.env.NEXT_PUBLIC_PUBLIC_KEY, // Replace with your public key
                 email: email,
