@@ -82,9 +82,9 @@ const Cart = ({data, data1}) => {
                 method: "POST",
                 body: JSON.stringify(item)
             }).then(() => {
-                window.location.href = "/"
+                window.reload()
             }) 
-        }, 5000);
+        }, 1500);
     }
     function removeAll(customer_id) {
         const item = {customer_id}
@@ -92,7 +92,7 @@ const Cart = ({data, data1}) => {
             method: "POST",
             body: JSON.stringify(item)
         }).then(() => {
-            window.location.href = "https://igowithigho-art-sale.vercel.app//cart?user="+id
+            window.reload()
         })
     }
     function storeSale(
