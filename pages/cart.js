@@ -213,7 +213,7 @@ const Cart = ({ data, data1 }) => {
 
 export default Cart
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
     const id = context?.query?.user
     const query = `
         *[_type == "cart" && customer_id == "${id}"]{
