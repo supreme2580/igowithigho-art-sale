@@ -82,7 +82,7 @@ const Cart = ({data, data1}) => {
                 method: "POST",
                 body: JSON.stringify(item)
             }).then(() => {
-                window.reload()
+                window.location.href = "/cart?user="+id
             }) 
         }, 1500);
     }
@@ -92,7 +92,7 @@ const Cart = ({data, data1}) => {
             method: "POST",
             body: JSON.stringify(item)
         }).then(() => {
-            window.reload()
+            window.location.href = "/cart?user="+id
         })
     }
     function storeSale(
