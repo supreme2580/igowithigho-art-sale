@@ -20,7 +20,7 @@ const Buy = ({ price, id, item }) => {
     }
     return(
         <div className="space-x-2.5 flex items-center">
-            <button className="flex items-center px-5 py-2 font-semibold border-2 rounded-lg border-green bg-green" onClick={ session != null && AddItemToCart }>
+            <button className="flex items-center px-5 py-2 font-semibold border-2 rounded-lg border-green bg-green" onClick={ session != null ? AddItemToCart : window.location.href = "https://jocular-macaron-e2beac.netlify.app/auth/signin" }>
                 <div>
                     <ShoppingCartIcon className="w-6 h-6 text-white" />
                 </div>
